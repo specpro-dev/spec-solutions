@@ -5,36 +5,36 @@ import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const FOUNDERS = [
   {
-    initials:   'NU',
-    name:       'Nashan Unais',
-    role:       'Co-Founder & Frontend Engineer',
+    initials: 'NU',
+    name: 'Nashan Unais',
+    role: 'Co-Founder & Frontend Engineer',
     credential: 'Builds production web applications with React and Next.js — focused on clean architecture, TypeScript, and interfaces that perform under real load. Associate Software Engineer at Intervest Software Technologies. BSc Computer Science, University of Westminster (via IIT Sri Lanka).',
-    linkedIn:   'https://www.linkedin.com/in/nashan-unais/',
-    portfolio:  'https://nashanunais.vercel.app/',
+    linkedIn: 'https://www.linkedin.com/in/nashan-unais/',
+    portfolio: 'https://nashanunais.vercel.app/',
   },
   {
-    initials:   'AF',
-    name:       'Ashfaq Farleen',
-    role:       'Co-Founder & Full Stack Engineer',
+    initials: 'AF',
+    name: 'Ashfaq Farleen',
+    role: 'Co-Founder & Full Stack Engineer',
     credential: 'Full-stack engineer across React, Node.js, Spring Boot, and .NET — with hands-on experience in automation pipelines, backend services, and freelance delivery. Software Engineer at Aventude. BSc Computer Science, IIT Sri Lanka.',
-    linkedIn:   'https://www.linkedin.com/in/ashfaq-farleen/',
-    portfolio:  'https://ashfaqfarleen.vercel.app/',
-  },
-     {
-    initials:   'MA',
-    name:       'Mohamed Ali Althaf Mohamed',
-    role:       'Software Engineer',
-    credential: 'ML/computer vision researcher — PyTorch, TensorFlow, React, Node.js. BSc (Hons) Computer Science, University of Westminster (First Class).',
-    linkedIn:   'https://www.linkedin.com/in/althaf-ali-dev',
-    portfolio:  'https://althafali.vercel.app/',
+    linkedIn: 'https://www.linkedin.com/in/ashfaq-farleen/',
+    portfolio: 'https://ashfaqfarleen.vercel.app/',
   },
   {
-    initials:   'SM',
-    name:       'Saleem Malik',
-    role:       'Software Engineer',
+    initials: 'MA',
+    name: 'Mohamed Ali Althaf Mohamed',
+    role: 'Software Engineer',
+    credential: 'ML/computer vision researcher — PyTorch, TensorFlow, React, Node.js. BSc (Hons) Computer Science, University of Westminster (First Class).',
+    linkedIn: 'https://www.linkedin.com/in/althaf-ali-dev',
+    portfolio: 'https://althafali.vercel.app/',
+  },
+  {
+    initials: 'SM',
+    name: 'Saleem Malik',
+    role: 'Software Engineer',
     credential: 'Full-stack engineer across Angular, React, Django, Node.js, with applied post-quantum cryptography research. BSc (Hons) Computer Science, University of Westminster.',
-    linkedIn:   'https://linkedin.com/in/saleemSE',
-    portfolio:  'https://github.com/saleemsgit',
+    linkedIn: 'https://linkedin.com/in/saleemSE',
+    portfolio: 'https://github.com/saleemsgit',
   },
 ] as const
 
@@ -45,7 +45,7 @@ function Avatar({ initials }: { initials: string }) {
       className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 border"
       style={{
         backgroundColor: 'rgba(200, 151, 47, 0.08)',
-        borderColor:     'var(--border-subtle)',
+        borderColor: 'var(--border-subtle)',
       }}
       aria-hidden="true"
     >
@@ -79,12 +79,12 @@ function ExternalIcon() {
 
 // ─── Animation variants ────────────────────────────────────────────────────────
 const container = {
-  hidden:  {},
+  hidden: {},
   visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
 }
 
 const item = {
-  hidden:  { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
 }
 
