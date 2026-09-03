@@ -11,18 +11,18 @@ import { Resend } from 'resend'
 //       - IP-based counter in Redis/KV
 //       - Cloudflare WAF rules (free tier available)
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 // Validate that required env vars exist at request time (not build time)
+// Resend is instantiated lazily inside the handler — NOT at module level —
+// because process.env.RESEND_API_KEY isn't available during `next build`.
 function getConfig() {
   const apiKey = process.env.RESEND_API_KEY
   const toEmail = process.env.CONTACT_TO_EMAIL
 
   if (!apiKey || apiKey === 're_xxxxxxxxxxxxxxxxxxxx') {
-    return { error: 'RESEND_API_KEY is not configured.' }
+    return { error: 'RESEND_API_KEY is not configured.' as const }
   }
   if (!toEmail) {
-    return { error: 'CONTACT_TO_EMAIL is not configured.' }
+    return { error: 'CONTACT_TO_EMAIL is not configured.' as const }
   }
   return { apiKey, toEmail }
 }
@@ -74,7 +74,8 @@ export async function POST(request: NextRequest) {
 
   const { name, businessName, phone, goal } = body
 
-  // Send email via Resend
+  // Send email via Resend (instantiated per-request, not at module level)
+  const resend = new Resend(config.apiKey)
   try {
     const { error } = await resend.emails.send({
       from: 'Spec Solutions <onboarding@resend.dev>', // PLACEHOLDER: Change to your verified domain before launch
