@@ -20,6 +20,22 @@ const FOUNDERS = [
     linkedIn:   'https://www.linkedin.com/in/ashfaq-farleen/',
     portfolio:  'https://ashfaqfarleen.vercel.app/',
   },
+     {
+    initials:   'MA',
+    name:       'Mohamed Ali Althaf Mohamed',
+    role:       'Software Engineer',
+    credential: 'ML/computer vision researcher — PyTorch, TensorFlow, React, Node.js. BSc (Hons) Computer Science, University of Westminster (First Class).',
+    linkedIn:   'https://www.linkedin.com/in/althaf-ali-dev',
+    portfolio:  'https://althafali.vercel.app/',
+  },
+  {
+    initials:   'SM',
+    name:       'Saleem Malik',
+    role:       'Software Engineer',
+    credential: 'Full-stack engineer across Angular, React, Django, Node.js, with applied post-quantum cryptography research. BSc (Hons) Computer Science, University of Westminster.',
+    linkedIn:   'https://linkedin.com/in/saleemSE',
+    portfolio:  'https://github.com/saleemsgit',
+  },
 ] as const
 
 // ─── Placeholder avatar ────────────────────────────────────────────────────────
@@ -102,7 +118,7 @@ export default function Team() {
             The Team
           </h2>
           <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>
-            Two engineers. One goal: software that does exactly what it was built to do.
+            One goal: software that does exactly what it was built to do.
           </p>
         </div>
 
