@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import MotionWrapper from '@/components/ui/MotionWrapper'
+import Link from 'next/link'
 
 // PORTFOLIO SECTION
 //
@@ -8,32 +9,34 @@ import MotionWrapper from '@/components/ui/MotionWrapper'
 
 const mockups = [
   {
-    id: 'education-academy',
-    src: '/education-cover.jpeg',
-    alt: 'Concept design for an MBA and education academy landing page showing course highlights, student registration form, and dark navy branding',
-    badge: 'Education Institute',
-    title: 'MBA Academy — Student Registration Site',
+    id: 'a2a-services',
+    src: '/a2a-cover.jpeg',
+    alt: 'Screenshot of A2A Services web app showing menu browsing, cart, and checkout flow for a UK institutional catering company',
+    badge: 'Client Project — UK Catering',
+    title: 'A2A Services — Ordering Platform',
     description:
-      'A full-funnel landing page for an MBA programme or tuition centre, designed to convert website visitors into enrolled students.',
+      'A production Angular single-page application built for a UK institutional catering company, handling end-to-end ordering from menu browsing through checkout.',
     points: [
-      'Solves the "after-hours inquiry" problem with an always-available registration form',
-      'Course highlights and programme details replace the need for a phone call to get basic information',
-      'Built for mobile — where most Sri Lankan parents first research educational options',
+      'Persisted cart and PayPal SDK checkout remove friction from bulk institutional ordering',
+      'Reactive Firestore-backed service layer powers live menus, galleries, and enquiry data',
+      'Standalone-component architecture with routes segmented by customer type for scalable growth',
     ],
+    liveUrl: 'https://a2aservicesltd.co.uk/',
   },
   {
-    id: 'clinic-booking',
-    src: '/clinic-cover.jpeg',
-    alt: 'Concept design for a premium clinic booking page showing appointment calendar, specialist profiles, and service selection cards',
-    badge: 'Clinic / Salon',
-    title: 'Premium Clinic — Online Booking System',
+    id: 'dealsbuzz',
+    src: '/dealsbuzz-cover.jpeg',
+    alt: 'Screenshot of DealsBuzz e-commerce storefront showing footwear categories, featured products, and pre-order flow',
+    badge: 'Client Project — E-commerce',
+    title: 'DealsBuzz — Footwear E-commerce Store',
     description:
-      'An appointment booking interface for clinics, specialist practices, or premium salons that eliminates phone-tag and lets patients book on their own schedule.',
+      "A live D2C storefront for Sri Lanka's authentic Crocs and footwear retailer, built to convert browsers into pre-order customers.",
     points: [
-      'Specialist selection and real-time availability removes the "call us to check" friction',
-      'Calendar-based booking reduces no-shows with automatic confirmation',
-      'Premium design signals quality before a patient ever steps through the door',
+      'Category-based browsing and trending/featured sections guide first-time visitors to a purchase',
+      'Pre-order flow with 30% upfront payment reduces cart abandonment on new-drop items',
+      'Order tracking and size-guide pages cut post-purchase support inquiries',
     ],
+    liveUrl: 'https://www.dealsbuzz.lk/',
   },
 ]
 
@@ -94,6 +97,11 @@ export default function Portfolio() {
                   <p className="mt-2 text-white/60 text-sm leading-relaxed">
                     {mockup.description}
                   </p>
+                  <div className="mt-2">
+                    <Link href={mockup.liveUrl} className="text-gold bg-gold/10 hover:bg-gold/20 px-3 py-2 rounded-lg text-sm font-semibold tracking-widest uppercase">
+                      Live Project
+                    </Link>
+                  </div>
 
                   {/* Bullet points */}
                   <ul className="mt-4 space-y-2.5" aria-label="What this design solves">
