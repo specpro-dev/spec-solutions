@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Spec Solutions Design Tokens ──────────────────────────────────────────── */
+:root {
+  /* Primary backgrounds */
+  --bg-base:        #080C14;   /* Near-black, deep navy-charcoal */
+  --bg-surface:     #0D1420;   /* Section alternate bg */
+  --bg-card:        #111827;   /* Card backgrounds */
+  --bg-card-hover:  #161F2E;   /* Card hover state */
+
+  /* Accent — precision gold/amber */
+  --accent:         #C8972F;   /* Primary accent — CTAs, highlights */
+  --accent-light:   #D9AA50;   /* Hover, glow */
+  --accent-muted:   #9A7124;   /* Subdued use — dividers, subtle labels */
+
+  /* Text */
+  --text-primary:   #F0F4F8;   /* Headlines */
+  --text-secondary: #8FA3BF;   /* Body, descriptions */
+  --text-muted:     #4A637D;   /* Labels, metadata, captions */
+
+  /* Borders */
+  --border-subtle:  rgba(200, 151, 47, 0.12);  /* Card borders */
+  --border-accent:  rgba(200, 151, 47, 0.35);  /* Focused/hover borders */
+
+  /* Functional aliases */
+  --gold:           #C8972F;
+  --gold-light:     #D9AA50;
+  --navy:           #080C14;
+  --navy-light:     #0D1420;
+  --navy-dark:      #050810;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Focus Visible ─────────────────────────────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--accent);
+  color: var(--navy-dark);
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-muted);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ─── Section spacing (py-28 md:py-36 per taste-skill spec) ─────────────────── */
+.section-padding {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+/* ─── Prose reset ───────────────────────────────────────────────────────────── */
+p {
+  line-height: 1.7;
+}
+
+/* ─── Token-based utilities ─────────────────────────────────────────────────── */
+@layer utilities {
+  .bg-base       { background-color: var(--bg-base); }
+  .bg-surface    { background-color: var(--bg-surface); }
+  .bg-card       { background-color: var(--bg-card); }
+  .bg-card-hover { background-color: var(--bg-card-hover); }
+
+  .text-primary   { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-muted     { color: var(--text-muted); }
+  .text-accent    { color: var(--accent); }
+
+  .border-subtle { border-color: var(--border-subtle); }
+  .border-accent { border-color: var(--border-accent); }
+
+  /* Standard easing for all hover/interactive transitions */
+  .transition-spec {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Hero radial gradient background */
+  .hero-gradient {
+    background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(200, 151, 47, 0.15) 0%, transparent 60%),
+                var(--bg-base);
+  }
+
+  /* Card border glow on hover */
+  .card-glow:hover {
+    box-shadow: 0 0 0 1px var(--border-accent), 0 8px 32px rgba(200, 151, 47, 0.08);
+  }
+}
+
+/* ─── Hero grain texture (CSS-only, zero JS) ────────────────────────────────── */
+.hero-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+  pointer-events: none;
+  opacity: 0.035;
+  animation: grain-shift 8s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -5% -10%; }
+  50%  { background-position: -15% 5%; }
+  75%  { background-position: 7% -15%; }
+  100% { background-position: 0 0; }
+}
+
+/* ─── Marquee (TrustBar, CSS-only) ─────────────────────────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 28s linear infinite;
+}
+
+/* ─── Reduced motion: disable all transitions/animations ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
