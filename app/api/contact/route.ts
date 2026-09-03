@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
       to: [config.toEmail],
       subject: `New lead: ${businessName} — ${goal}`,
       text: `
-New contact form submission from nextintakedigital.com
+New contact form submission from Spec Solutions
 
 Name: ${name}
 Business: ${businessName}
@@ -93,7 +93,7 @@ Submitted at: ${new Date().toISOString()}
       `.trim(),
       html: `
         <div style="font-family: system-ui, sans-serif; max-width: 520px; padding: 24px;">
-          <h2 style="color: #0F1B3C; margin-top: 0;">New lead from nextintakedigital.com</h2>
+          <h2 style="color: #0F1B3C; margin-top: 0;">New lead from Spec Solutions</h2>
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px 0; color: #6B7280; font-size: 13px; width: 120px;">Name</td>

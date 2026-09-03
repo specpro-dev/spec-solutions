@@ -124,8 +124,8 @@ export default function Contact() {
                     <p className="text-sm mt-0.5 text-red-400/80">{formState.errorMessage}</p>
                     <p className="text-sm mt-1 text-red-400/60">
                       You can also reach us directly at{' '}
-                      <a href="mailto:hello@nextintakedigital.com" className="underline hover:text-red-400">
-                        hello@nextintakedigital.com
+                      <a href="mailto:specprochat@gmail.com" className="underline hover:text-red-400">
+                        specprochat@gmail.com
                       </a>
                     </p>
                   </div>
@@ -265,11 +265,10 @@ export default function Contact() {
                     Email
                   </p>
                   <a
-                    href="mailto:hello@nextintakedigital.com"
+                    href="mailto:specprochat@gmail.com"
                     className="text-white text-sm hover:text-gold transition-colors duration-200"
                   >
-                    {/* PLACEHOLDER: Replace with real email before launch */}
-                    hello@nextintakedigital.com
+                    specprochat@gmail.com
                   </a>
                 </div>
               </div>
@@ -286,11 +285,12 @@ export default function Contact() {
                     Phone / WhatsApp
                   </p>
                   <a
-                    href="tel:+94700000000"
+                    href="https://wa.me/94707386903"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-white text-sm hover:text-gold transition-colors duration-200"
                   >
-                    {/* PLACEHOLDER: Replace with real phone number before launch */}
-                    +94 70 000 0000
+                    +94 70 7386903
                   </a>
                 </div>
               </div>
