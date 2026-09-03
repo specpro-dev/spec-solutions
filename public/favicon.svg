@@ -1,0 +1,10 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- PLACEHOLDER favicon — generated from NI monogram. Refine before launch. -->
+  <rect width="180" height="180" rx="36" fill="#0F1B3C"/>
+  <!-- N letterform -->
+  <path d="M32 45 L32 135 L57 135 L57 88 L108 135 L140 135 L140 45 L115 45 L115 92 L64 45 Z" fill="white"/>
+  <!-- I letterform with caps -->
+  <rect x="150" y="45" width="25" height="90" rx="4" fill="white"/>
+  <rect x="142" y="45" width="41" height="18" rx="4" fill="white"/>
+  <rect x="142" y="117" width="41" height="18" rx="4" fill="white"/>
+</svg>
