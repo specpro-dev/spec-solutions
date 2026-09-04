@@ -8,7 +8,7 @@ const FOUNDERS = [
     initials: 'NU',
     name: 'Nashan Unais',
     role: 'Co-Founder & Frontend Engineer',
-    credential: 'Builds production web applications with React and Next.js — focused on clean architecture, TypeScript, and interfaces that perform under real load. Associate Software Engineer at Intervest Software Technologies. BSc Computer Science, University of Westminster (via IIT Sri Lanka).',
+    credential: 'Builds production web applications with React and Next.js — focused on clean architecture, TypeScript, and interfaces that perform under real load. Software Engineer at Intervest Software Technologies. BSc Computer Science, University of Westminster (via IIT Sri Lanka).',
     linkedIn: 'https://www.linkedin.com/in/nashan-unais/',
     portfolio: 'https://nashanunais.vercel.app/',
   },
