@@ -49,7 +49,7 @@ export default function Home() {
           </div>
 
           <p className="text-white/30 text-xs text-center sm:text-right">
-            © {new Date().getFullYear()} Spec Solutions. Kalutara &amp; Colombo, Sri Lanka.
+            © {new Date().getFullYear()} SpecGig. Kalutara &amp; Colombo, Sri Lanka.
             <br className="hidden sm:block" />
             {' '}Custom-coded. Not a template.
           </p>

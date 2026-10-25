@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup script for Spec Solutions
+# Setup script for SpecGig
 # Run this once after cloning / first setup
 # Usage: bash scripts/setup.sh
 

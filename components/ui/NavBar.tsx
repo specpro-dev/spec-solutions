@@ -71,7 +71,7 @@ export default function NavBar() {
             aria-label="Main navigation"
           >
             {/* Logo */}
-            <a href="/" aria-label="Spec Solutions — return to top" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); history.pushState(null, '', '/') }}>
+            <a href="/" aria-label="SpecGig — return to top" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); history.pushState(null, '', '/') }}>
               <Logo variant="horizontal" />
             </a>
 

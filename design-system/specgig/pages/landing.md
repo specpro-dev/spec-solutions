@@ -1,6 +1,6 @@
 # Landing Page Overrides
 
-> **PROJECT:** Spec Solutions
+> **PROJECT:** SpecGig
 > **Generated:** 2026-06-28 06:03:14
 > **Page Type:** Landing / Marketing
 

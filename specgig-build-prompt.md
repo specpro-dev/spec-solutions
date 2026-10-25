@@ -1,4 +1,4 @@
-# SPEC SOLUTIONS — COMPLETE SITE BUILD PROMPT
+# SPECGIG — COMPLETE SITE BUILD PROMPT
 > Paste this entire document into Claude Code, Cursor, or any capable AI coding agent with Claude Code / Cursor + the installed skills.
 > Intended agent: Claude Code with ui-ux-pro-max-skill and taste-skill installed globally.
 
@@ -12,7 +12,7 @@ Before writing a single line of component code, run the following search queries
 # Step 1 — Generate full design system for the project
 python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py \
   "premium software agency dark tech precision engineering" \
-  --design-system --persist -p "Spec Solutions" --page "landing" -f markdown
+  --design-system --persist -p "SpecGig" --page "landing" -f markdown
 
 # Step 2 — Style intelligence for the dark + gold tech brand direction
 python3 ~/.claude/skills/ui-ux-pro-max/scripts/search.py \
@@ -63,10 +63,10 @@ VISUAL_DENSITY:    3   (art-gallery breathing room — expensive whitespace, not
 
 ---
 
-## 2. PROJECT IDENTITY — SPEC SOLUTIONS
+## 2. PROJECT IDENTITY — SPECGIG
 
 ### Company Context
-**Spec Solutions** is a boutique software engineering studio. The name signals precision: engineering to specification. The brand language is: structured, technical, trustworthy, quietly confident. Not flashy. Not startup-ey. The kind of agency that a CFO or operations director would trust with a mission-critical system.
+**SpecGig** is a boutique software engineering studio. The name signals precision: engineering to specification. The brand language is: structured, technical, trustworthy, quietly confident. Not flashy. Not startup-ey. The kind of agency that a CFO or operations director would trust with a mission-critical system.
 
 ### Brand Token Overrides
 Update `globals.css` and `tailwind.config.ts` to use these tokens (replace the NextIntake palette entirely):
@@ -103,8 +103,8 @@ Update `globals.css` and `tailwind.config.ts` to use these tokens (replace the N
 ```
 
 ### Logo
-Replace `Logo.tsx`. The Spec Solutions logo is a wordmark + monogram system:
-- **Monogram**: `SS` with the two S letterforms interlocked or geometrically stacked — rendered as an inline SVG with `--accent` fill.
+Replace `Logo.tsx`. The SpecGig logo is a wordmark + monogram system:
+- **Monogram**: `SG` with the two S letterforms interlocked or geometrically stacked — rendered as an inline SVG with `--accent` fill.
 - **Wordmark**: "SPEC" in `font-weight: 700` tracking-widest uppercase, "SOLUTIONS" in `font-weight: 400` tracking-wider, slightly smaller — both in `--text-primary`.
 - Provide both a horizontal lockup (nav) and a stacked lockup (footer).
 
@@ -125,10 +125,10 @@ Replace `Logo.tsx`. The Spec Solutions logo is a wordmark + monogram system:
 
 ---
 
-## 4. PROJECT STRUCTURE — ADAPTED FOR SPEC SOLUTIONS
+## 4. PROJECT STRUCTURE — ADAPTED FOR SPECGIG
 
 ```
-spec-solutions/
+specgig/
 ├── app/
 │   ├── layout.tsx            # Root layout — metadata, fonts, GA4, WhatsApp FAB
 │   ├── page.tsx              # Assembles all sections in order
@@ -142,7 +142,7 @@ spec-solutions/
 │   ├── sections/
 │   │   ├── Hero.tsx              # NO ANIMATIONS (LCP protection)
 │   │   ├── TrustBar.tsx          # Logo ticker / social proof bar
-│   │   ├── Services.tsx          # What Spec Solutions builds
+│   │   ├── Services.tsx          # What SpecGig builds
 │   │   ├── ProblemSolution.tsx   # 3-card problem/solution
 │   │   ├── Portfolio.tsx         # Work showcase
 │   │   ├── Process.tsx           # How we work (numbered steps)
@@ -151,7 +151,7 @@ spec-solutions/
 │   │   └── Contact.tsx           # Lead capture
 │   ├── ui/
 │   │   ├── NavBar.tsx            # Sticky + scroll-blur
-│   │   ├── Logo.tsx              # SS wordmark SVG
+│   │   ├── Logo.tsx              # SG wordmark SVG
 │   │   ├── MotionWrapper.tsx     # Framer Motion fade-in (below-fold only)
 │   │   ├── SplitText.tsx         # ReactBits text reveal (below-fold only)
 │   │   ├── GradientText.tsx      # ReactBits gradient text
@@ -240,10 +240,10 @@ spec-solutions/
 
 ---
 
-## 6. PAGE SECTIONS — COMPLETE SPEC FOR SPEC SOLUTIONS
+## 6. PAGE SECTIONS — COMPLETE SPEC FOR SPECGIG
 
 ### Section 1: NavBar
-- Logo left (horizontal SS lockup)
+- Logo left (horizontal SG lockup)
 - Navigation links (desktop only, hidden mobile): Services · Work · Process · Team
 - Single CTA right: **"Book a Discovery Call"** → `#contact` — styled as a small outlined button with `--accent` border, `--accent` text, hover fills solid gold
 - Mobile: hamburger → full-height slide-in overlay menu (Framer Motion `AnimatePresence` + `x: "100%" → 0`)
@@ -299,7 +299,7 @@ spec-solutions/
   - `04 Launch & Handover` — Deployed to Vercel, domain configured, analytics live. Plus a recorded walkthrough of your new system.
 
 ### Section 8: WhyUs (`#why-us`)
-- **Heading**: "Why Spec Solutions"
+- **Heading**: "Why SpecGig"
 - **Layout**: 4 numbered rows (01–04), separated by `--border-subtle` horizontal dividers — NO generic 3-icon grid
 - **Items**:
   - `01 Custom-Coded, Not Configured` — Every line of code serves a purpose defined in your spec. Nothing inherited from a theme marketplace.
@@ -319,7 +319,7 @@ spec-solutions/
 - **Heading**: "Start with a Conversation"
 - **Sub-copy**: "Tell us what you need to build. We'll tell you if it fits what we do — and exactly what it would take."
 - **Form fields**: Name · Business Name · Phone · Goal (dropdown)
-- **Goal options** (updated for Spec Solutions):
+- **Goal options** (updated for SpecGig):
   - "Build a booking or registration system"
   - "Replace or upgrade an existing site"
   - "Set up an automation or lead capture system"
@@ -331,7 +331,7 @@ spec-solutions/
 - ⚠️ Replace placeholder email, phone, and WhatsApp number before launch
 
 ### Footer
-- Left: SS stacked logo + "Spec Solutions" wordmark
+- Left: SG stacked logo + "SpecGig" wordmark
 - Center: Quick links (Services · Work · Process · Contact)
 - Right: Copyright + location "Kalutara & Colombo, Sri Lanka"
 - Bottom rule: `"Custom-coded. Not a template. Not a guess."`
@@ -356,8 +356,8 @@ spec-solutions/
 
 ```typescript
 export const metadata: Metadata = {
-  title: 'Custom Software Development for Businesses in Sri Lanka | Spec Solutions',
-  description: 'Spec Solutions builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates. Based in Kalutara & Colombo.',
+  title: 'Custom Software Development for Businesses in Sri Lanka | SpecGig',
+  description: 'SpecGig builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates. Based in Kalutara & Colombo.',
   keywords: [
     'custom software development Sri Lanka',
     'web application development Kalutara',
@@ -371,8 +371,8 @@ export const metadata: Metadata = {
   openGraph: {
     locale: 'en_LK',
     type: 'website',
-    siteName: 'Spec Solutions',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Spec Solutions — Custom Software for Sri Lankan Businesses' }],
+    siteName: 'SpecGig',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'SpecGig — Custom Software for Sri Lankan Businesses' }],
   },
   twitter: { card: 'summary_large_image' },
 }
@@ -484,7 +484,7 @@ const securityHeaders = [
 
 ---
 
-## 14. GA4 TRACKING EVENTS — UPDATED FOR SPEC SOLUTIONS
+## 14. GA4 TRACKING EVENTS — UPDATED FOR SPECGIG
 
 | Event | Trigger | Params |
 |---|---|---|
@@ -542,7 +542,7 @@ const securityHeaders = [
 Build in this sequence to avoid rework:
 
 1. **Design system** — Run Step 0 commands. Generate `design-system/MASTER.md`.
-2. **Tokens** — Update `globals.css` and `tailwind.config.ts` with Spec Solutions palette.
+2. **Tokens** — Update `globals.css` and `tailwind.config.ts` with SpecGig palette.
 3. **Logo** — Build `Logo.tsx` (SVG, both lockups).
 4. **Layout** — `app/layout.tsx` (metadata, fonts, GA4, WhatsApp FAB).
 5. **NavBar** — `NavBar.tsx` (copy 21st.dev component, adapt to design system).

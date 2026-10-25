@@ -2,7 +2,7 @@ import MotionWrapper from '@/components/ui/MotionWrapper'
 
 // WHY US / OUR APPROACH SECTION
 //
-// Positions Spec Solutions as software engineers, not designers-who-also-code.
+// Positions SpecGig as software engineers, not designers-who-also-code.
 // Deliberately avoids the standard "3 icons in a row" layout — uses a numbered
 // approach that feels engineering-specific and structured, not generic agency copy.
 //
@@ -44,7 +44,7 @@ export default function WhyUs() {
     <section
       id="why-us"
       className="section-padding bg-navy"
-      aria-label="Why Spec Solutions"
+      aria-label="Why SpecGig"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section header */}

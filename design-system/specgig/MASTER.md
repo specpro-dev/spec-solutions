@@ -6,7 +6,7 @@
 
 ---
 
-**Project:** Spec Solutions
+**Project:** SpecGig
 **Generated:** 2026-06-28 06:03:14
 **Category:** Space Tech / Aerospace
 
