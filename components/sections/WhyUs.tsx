@@ -2,7 +2,7 @@ import MotionWrapper from '@/components/ui/MotionWrapper'
 
 // WHY US / OUR APPROACH SECTION
 //
-// Positions CodeLynt as software engineers, not designers-who-also-code.
+// Positions Codelynt as software engineers, not designers-who-also-code.
 // Deliberately avoids the standard "3 icons in a row" layout — uses a numbered
 // approach that feels engineering-specific and structured, not generic agency copy.
 //
@@ -43,19 +43,19 @@ export default function WhyUs() {
   return (
     <section
       id="why-us"
-      className="section-padding bg-navy"
-      aria-label="Why CodeLynt"
+      className="section-py bg-bg-surface"
+      aria-label="Why Codelynt"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <MotionWrapper className="mb-16">
-          <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-3">
+          <p className="eyebrow mb-3">
             Our approach
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white max-w-xl">
+          <h2 className="section-title max-w-xl">
             Software engineers, not designers who also code
           </h2>
-          <p className="mt-4 text-white/60 max-w-lg leading-relaxed">
+          <p className="mt-4 text-text-secondary max-w-lg leading-relaxed">
             The distinction matters. An engineer thinks about performance budgets,
             security surface area, and what happens when your business grows.
             A designer thinks about what looks good today.
@@ -63,13 +63,13 @@ export default function WhyUs() {
         </MotionWrapper>
 
         {/* Differentiators — staggered numbered list layout */}
-        <div className="space-y-0 divide-y divide-white/8">
+        <div className="space-y-0 divide-y divide-[var(--border-subtle)]">
           {differentiators.map((item, i) => (
             <MotionWrapper key={item.number} delay={i * 0.1}>
               <div className="py-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start group">
                 {/* Number */}
                 <div
-                  className="text-5xl font-bold text-white/8 group-hover:text-white/12 transition-colors duration-300 select-none leading-none"
+                  className="text-5xl font-bold text-accent/20 group-hover:text-accent/30 transition-colors duration-300 select-none leading-none"
                   aria-hidden="true"
                 >
                   {item.number}
@@ -77,13 +77,13 @@ export default function WhyUs() {
 
                 {/* Content */}
                 <div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-white/60 leading-relaxed text-sm">{item.body}</p>
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">{item.title}</h3>
+                  <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
                 </div>
 
                 {/* Tag */}
                 <div className="md:text-right">
-                  <span className="inline-block px-3 py-1.5 rounded-lg bg-gold/10 border border-gold/20 text-gold text-xs font-semibold">
+                  <span className="inline-block px-3 py-1.5 rounded-lg bg-accent/10 border border-[var(--border-subtle)] text-accent-light text-xs font-semibold">
                     {item.tag}
                   </span>
                 </div>

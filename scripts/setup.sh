@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup script for CodeLynt
+# Setup script for Codelynt
 # Run this once after cloning / first setup
 # Usage: bash scripts/setup.sh
 

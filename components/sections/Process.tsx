@@ -61,7 +61,7 @@ export default function Process() {
   const prefersReduced = useReducedMotion()
   const timelineRef    = useRef<HTMLDivElement>(null)
 
-  // Grow the gold line as the timeline scrolls into view
+  // Grow the line as the timeline scrolls into view
   const { scrollYProgress } = useScroll({
     target:  timelineRef,
     offset:  ['start 85%', 'end 35%'],
@@ -77,23 +77,15 @@ export default function Process() {
   return (
     <section
       id="process"
-      className="section-padding"
+      className="section-py"
       style={{ backgroundColor: 'var(--bg-surface)' }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
         <div className="mb-16 max-w-2xl">
-          <p
-            className="font-mono text-xs tracking-widest uppercase mb-4"
-            style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
-          >
-            &lt; PROCESS /&gt;
-          </p>
-          <h2
-            className="text-3xl md:text-4xl font-bold leading-tight mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <p className="eyebrow mb-4">Process</p>
+          <h2 className="section-title mb-4">
             How We Work
           </h2>
           <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>
@@ -108,20 +100,20 @@ export default function Process() {
             {/* ── Left: vertical timeline ─────────────────────────────────── */}
             <div className="relative" ref={timelineRef}>
 
-              {/* Static guide line — full height, gold-subtle */}
+              {/* Static guide line — full height, subtle */}
               <div
                 className="absolute top-1.5 bottom-1.5 w-px pointer-events-none"
                 style={{ left: '16px', backgroundColor: 'var(--border-subtle)' }}
                 aria-hidden="true"
               />
 
-              {/* Animated gold overlay — grows from top on scroll */}
+              {/* Animated overlay — grows from top on scroll */}
               <m.div
                 className="absolute top-1.5 w-px pointer-events-none origin-top"
                 style={{
                   left:            '16px',
                   height:          'calc(100% - 0.375rem)',
-                  backgroundColor: 'var(--accent)',
+                  backgroundImage: 'linear-gradient(180deg, var(--accent), var(--accent-2))',
                   scaleY:          prefersReduced ? 1 : scaleY,
                 }}
                 aria-hidden="true"
@@ -154,8 +146,8 @@ export default function Process() {
                     {/* Step number */}
                     <div className="flex-shrink-0 w-8 pt-0.5 pl-7">
                       <span
-                        className="font-mono text-xs font-medium tracking-widest"
-                        style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
+                        className="text-xs font-medium tracking-widest"
+                        style={{ color: 'var(--accent-light)' }}
                       >
                         {number}
                       </span>
@@ -172,8 +164,8 @@ export default function Process() {
                           {title}
                         </h3>
                         <span
-                          className="font-mono text-xs flex-shrink-0"
-                          style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-jetbrains-mono)' }}
+                          className="text-xs flex-shrink-0"
+                          style={{ color: 'var(--text-secondary)' }}
                         >
                           {duration}
                         </span>
@@ -190,7 +182,7 @@ export default function Process() {
                       {/* Deliverable */}
                       <div className="flex items-start gap-2">
                         <span className="text-xs flex-shrink-0 mt-0.5" style={{ color: 'var(--accent)' }} aria-hidden="true">↳</span>
-                        <span className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                        <span className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                           {deliverable}
                         </span>
                       </div>
@@ -207,21 +199,20 @@ export default function Process() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 viewport={{ once: true, margin: '-8%' }}
-                className="rounded-xl border overflow-hidden flex flex-col"
-                style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-subtle)' }}
+                className="card overflow-hidden flex flex-col"
               >
                 {/* Top accent line — same pattern as service cards */}
                 <div
                   className="h-px w-full flex-shrink-0"
-                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, transparent 65%)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 35%, transparent 70%)' }}
                   aria-hidden="true"
                 />
 
                 <div className="flex flex-col gap-6 p-8 flex-1">
                   <div>
                     <p
-                      className="font-mono text-xs tracking-widest uppercase mb-3"
-                      style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
+                      className="text-xs tracking-widest uppercase mb-3"
+                      style={{ color: 'var(--accent-light)' }}
                     >
                       No Commitment Required
                     </p>
@@ -247,7 +238,7 @@ export default function Process() {
                           width="14" height="14" viewBox="0 0 14 14" fill="none"
                           className="flex-shrink-0 mt-0.5" aria-hidden="true"
                         >
-                          <path d="M2 7l3.5 3.5L12 3" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M2 7l3.5 3.5L12 3" stroke="var(--accent-2)" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                         <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{item}</span>
                       </li>
@@ -256,12 +247,9 @@ export default function Process() {
 
                   <button
                     onClick={scrollToContact}
-                    className="w-full py-3.5 text-sm font-bold rounded-lg transition-colors duration-200"
-                    style={{ backgroundColor: 'var(--accent)', color: 'var(--navy-dark)' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--accent-light)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'var(--accent)' }}
+                    className="btn btn-primary w-full"
                   >
-                    Book a Discovery Call
+                    Get in Touch
                   </button>
                 </div>
               </m.div>

@@ -1,15 +1,16 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
 import Logo from './Logo'
 import { trackEvent } from '@/lib/analytics'
 
+// Careers omitted: no page or anchor exists yet.
 const NAV_LINKS = [
   { label: 'Services', id: 'services' },
-  { label: 'Work',     id: 'portfolio' },
-  { label: 'Process',  id: 'process' },
-  { label: 'Team',     id: 'team' },
+  { label: 'Solutions', id: 'portfolio' },
+  { label: 'About', id: 'team' },
 ] as const
 
 function scrollToSection(id: string, e: React.MouseEvent) {
@@ -22,19 +23,19 @@ function scrollToSection(id: string, e: React.MouseEvent) {
 }
 
 export default function NavBar() {
-  const [scrolled, setScrolled]   = useState(false)
-  const [menuOpen, setMenuOpen]   = useState(false)
-  const rafRef                    = useRef<number>(0)
-  const prefersReduced            = useReducedMotion()
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const rafRef = useRef<number>(0)
+  const drawerRef = useRef<HTMLDivElement>(null)
+  const openerRef = useRef<HTMLButtonElement>(null)
+  const prefersReduced = useReducedMotion()
 
-  // rAF-throttled scroll detection
   useEffect(() => {
     const onScroll = () => {
       cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 40)
-      })
+      rafRef.current = requestAnimationFrame(() => setScrolled(window.scrollY > 40))
     }
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', onScroll)
@@ -42,49 +43,84 @@ export default function NavBar() {
     }
   }, [])
 
-  // Prevent background scroll while mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [menuOpen])
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false)
+    openerRef.current?.focus()
+  }, [])
 
-  const closeMenu = () => setMenuOpen(false)
+  // Scroll lock, ESC to close, and focus trap while the drawer is open
+  useEffect(() => {
+    if (!menuOpen) return
+    document.body.style.overflow = 'hidden'
+    const root = drawerRef.current
+    const focusables = () =>
+      Array.from(root?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
+    focusables()[0]?.focus()
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        closeMenu()
+        return
+      }
+      if (e.key !== 'Tab') return
+      const items = focusables()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen, closeMenu])
+
+  const goContact = (e: React.MouseEvent, afterClick?: () => void) => {
+    scrollToSection('contact', e)
+    afterClick?.()
+    trackEvent('cta_click', { cta_label: 'Get in Touch', section: 'navbar' })
+  }
 
   return (
     <>
-      {/* ── Sticky bar ─────────────────────────────────────────────────────── */}
-      <header
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{ willChange: 'transform' }}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50">
         <div
-          style={{
-            backgroundColor: scrolled ? 'rgba(8, 12, 20, 0.92)' : 'transparent',
-            backdropFilter:         scrolled ? 'blur(12px)' : 'none',
-            WebkitBackdropFilter:   scrolled ? 'blur(12px)' : 'none',
-            borderBottom: `1px solid ${scrolled ? 'var(--border-subtle)' : 'transparent'}`,
-            transition: 'background-color 0.2s ease-out, border-color 0.2s ease-out',
-          }}
+          className={`border-b transition-colors duration-200 ${
+            scrolled
+              ? 'bg-bg-base/80 backdrop-blur-md border-[var(--border-subtle)]'
+              : 'bg-transparent border-transparent'
+          }`}
         >
           <nav
-            className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between"
+            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
             aria-label="Main navigation"
           >
-            {/* Logo */}
-            <a href="/" aria-label="CodeLynt — return to top" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); history.pushState(null, '', '/') }}>
-              <Logo variant="horizontal" />
+            <a
+              href="/"
+              aria-label="CODELYNT — return to top"
+              onClick={e => {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+                history.pushState(null, '', '/')
+              }}
+            >
+              <Logo height={28} priority className="md:hidden" />
+              <Logo height={32} priority className="hidden md:block" />
             </a>
 
-            {/* Desktop links */}
-            <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0" role="list">
+            <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
               {NAV_LINKS.map(({ label, id }) => (
                 <li key={id}>
                   <a
                     href={`/${id}`}
-                    className="text-sm font-medium transition-colors duration-200"
-                    style={{ color: 'var(--text-secondary)' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
+                    className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200"
                     onClick={e => scrollToSection(id, e)}
                   >
                     {label}
@@ -93,52 +129,30 @@ export default function NavBar() {
               ))}
             </ul>
 
-            {/* Right cluster */}
             <div className="flex items-center gap-3">
-              {/* Desktop CTA */}
-              <a
-                href="/contact"
-                className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border cursor-pointer transition-colors duration-200"
-                style={{ borderColor: 'var(--accent)', color: 'var(--accent)' }}
-                onMouseEnter={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.backgroundColor = 'var(--accent)'
-                  el.style.color = 'var(--navy-dark)'
-                }}
-                onMouseLeave={e => {
-                  const el = e.currentTarget as HTMLElement
-                  el.style.backgroundColor = 'transparent'
-                  el.style.color = 'var(--accent)'
-                }}
-                onClick={e => {
-                  scrollToSection('contact', e)
-                  trackEvent('cta_click', { cta_label: 'Book Discovery Call', section: 'navbar' })
-                }}
-              >
-                Book a Discovery Call
+              <a href="/contact" className="btn btn-primary hidden md:inline-flex" onClick={e => goContact(e)}>
+                Get in Touch →
               </a>
 
-              {/* Hamburger — mobile only */}
               <button
-                className="md:hidden flex flex-col justify-center items-center w-9 h-9 gap-[5px] rounded cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                ref={openerRef}
+                className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer focus-visible:outline-2 focus-visible:outline-[#60A5FA]"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
                 aria-controls="mobile-menu"
               >
-                <span className="block w-5 h-px" style={{ backgroundColor: 'var(--text-primary)' }} />
-                <span className="block w-5 h-px" style={{ backgroundColor: 'var(--text-primary)' }} />
-                <span className="block w-4 h-px self-start" style={{ backgroundColor: 'var(--text-primary)' }} />
+                <Menu size={24} strokeWidth={1.75} aria-hidden="true" />
               </button>
             </div>
           </nav>
         </div>
       </header>
 
-      {/* ── Mobile overlay ──────────────────────────────────────────────────── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            ref={drawerRef}
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
@@ -146,66 +160,43 @@ export default function NavBar() {
             initial={{ x: prefersReduced ? 0 : '100%', opacity: prefersReduced ? 0 : 1 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: prefersReduced ? 0 : '100%', opacity: prefersReduced ? 0 : 1 }}
-            transition={{
-              type: 'tween',
-              duration: prefersReduced ? 0.15 : 0.32,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="fixed inset-0 z-[60] flex flex-col px-6 pt-5 pb-10"
-            style={{ backgroundColor: 'var(--bg-surface)' }}
+            transition={{ type: 'tween', duration: prefersReduced ? 0.15 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 z-[60] flex flex-col h-[100dvh] px-4 sm:px-6 pt-3 pb-10 bg-bg-base"
           >
-            {/* Overlay header */}
-            <div className="flex items-center justify-between">
-              <Logo variant="horizontal" />
+            <div className="flex items-center justify-between h-16">
+              <Logo height={28} />
               <button
                 onClick={closeMenu}
-                className="flex items-center justify-center w-9 h-9 rounded cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer"
                 aria-label="Close navigation menu"
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                  <path
-                    d="M1 1L15 15M15 1L1 15"
-                    stroke="var(--text-primary)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <X size={24} strokeWidth={1.75} aria-hidden="true" />
               </button>
             </div>
 
-            {/* Nav links */}
-            <nav className="flex flex-col mt-12" aria-label="Mobile navigation">
+            <nav className="flex flex-col mt-8" aria-label="Mobile navigation">
               {NAV_LINKS.map(({ label, id }) => (
                 <a
                   key={id}
                   href={`/${id}`}
-                  onClick={e => { scrollToSection(id, e); closeMenu() }}
-                  className="py-5 text-2xl font-semibold tracking-tight border-b transition-colors duration-200"
-                  style={{
-                    color: 'var(--text-primary)',
-                    borderColor: 'var(--border-subtle)',
+                  onClick={e => {
+                    scrollToSection(id, e)
+                    setMenuOpen(false)
                   }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-primary)' }}
+                  className="py-5 text-2xl font-semibold tracking-tight border-b border-[var(--border-subtle)] text-text-primary hover:text-accent-light transition-colors duration-200"
                 >
                   {label}
                 </a>
               ))}
             </nav>
 
-            {/* Mobile CTA */}
             <div className="mt-auto">
               <a
                 href="/contact"
-                onClick={e => {
-                  scrollToSection('contact', e)
-                  closeMenu()
-                  trackEvent('cta_click', { cta_label: 'Book Discovery Call', section: 'navbar' })
-                }}
-                className="flex items-center justify-center w-full py-4 text-base font-semibold rounded-md cursor-pointer transition-opacity duration-200 hover:opacity-90 active:opacity-80"
-                style={{ backgroundColor: 'var(--accent)', color: 'var(--navy-dark)' }}
+                onClick={e => goContact(e, () => setMenuOpen(false))}
+                className="btn btn-primary w-full"
               >
-                Book a Discovery Call
+                Get in Touch →
               </a>
             </div>
           </motion.div>

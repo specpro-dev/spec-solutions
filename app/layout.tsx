@@ -1,46 +1,38 @@
 import type { Metadata, Viewport } from 'next'
-import { Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google'
+import { Sora } from 'next/font/google'
 import './globals.css'
 import Analytics from '@/components/analytics/Analytics'
 import WhatsAppButton from '@/components/ui/WhatsAppButton'
 
 // ─── Fonts ────────────────────────────────────────────────────────────────────
-const plusJakarta = Plus_Jakarta_Sans({
+const sora = Sora({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-plus-jakarta',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-sora',
   display: 'swap',
-  preload: true,
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-jetbrains-mono',
-  display: 'swap',
-  preload: true,
 })
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://specsolutions.lk'
+const title = 'CODELYNT — Build. Innovate. Transform.'
+const description =
+  'A modern technology company building AI-powered solutions and scalable digital products.'
 
 export const metadata: Metadata = {
-  title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
-  description:
-    'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates. Based in Kalutara & Colombo.',
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
   keywords: [
-    'custom software development Sri Lanka',
-    'web application development Kalutara',
-    'booking system Sri Lanka',
-    'custom website Sri Lanka',
-    'Next.js developer Sri Lanka',
-    'automation system Sri Lanka',
-    'Colombo web developer',
-    'custom coded website Sri Lanka',
+    'AI-powered solutions',
+    'custom software development',
+    'scalable digital products',
+    'web application development',
+    'automation',
+    'Codelynt',
   ],
-  authors: [{ name: 'CodeLynt', url: siteUrl }],
-  creator: 'CodeLynt',
-  publisher: 'CodeLynt',
+  authors: [{ name: 'Codelynt', url: siteUrl }],
+  creator: 'Codelynt',
+  publisher: 'Codelynt',
   robots: {
     index: true,
     follow: true,
@@ -57,34 +49,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: siteUrl,
-    siteName: 'CodeLynt',
-    locale: 'en_LK',
-    title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
-    description:
-      'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
-    images: [
-      {
-        url: `${siteUrl}/og-image.png`,
-        width: 1200,
-        height: 630,
-        alt: 'CodeLynt — Custom Software for Sri Lankan Businesses',
-      },
-    ],
+    siteName: 'CODELYNT',
+    locale: 'en_US',
+    title,
+    description,
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
-    description:
-      'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
-    images: [`${siteUrl}/og-image.png`],
+    title,
+    description,
   },
   icons: {
     icon: [
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/brand/favicon.ico', sizes: 'any' },
+      { url: '/brand/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/brand/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/brand/favicon.svg', type: 'image/svg+xml' },
     ],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    apple: [{ url: '/brand/apple-touch-icon.png', sizes: '180x180' }],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GSC_VERIFICATION || undefined,
@@ -92,7 +74,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#080C14',
+  themeColor: '#0B1020',
   width: 'device-width',
   initialScale: 1,
 }
@@ -102,7 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       dir="ltr"
-      className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
+      className={`${sora.variable}`}
     >
       <body>
         {children}

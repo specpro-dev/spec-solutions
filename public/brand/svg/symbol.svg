@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 108 108" role="img" aria-label="CODELYNT symbol"><title>CODELYNT symbol</title>
+<defs><linearGradient id="gs" gradientUnits="userSpaceOnUse" x1="10" y1="0" x2="90" y2="100"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs>
+<path d="M0 32 L53 0 L100 26 L79.4 38 L53 23 L29 37.5 L29 62.5 L53 77 L79.4 62 L100 74 L53 100 L0 68 Z" fill="url(#gs)" stroke="url(#gs)" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="29,62.5 53,77 38,77 29,72" fill="#0B1020" opacity=".28"/>
+</svg>

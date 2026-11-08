@@ -1,38 +1,12 @@
 'use client'
 
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
+import { Globe, Zap, SearchCheck } from 'lucide-react'
 import { trackEvent } from '@/lib/analytics'
 
-// ─── Icons ────────────────────────────────────────────────────────────────────
-function PortalIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect x="2" y="3" width="20" height="15" rx="2" />
-      <path d="M2 8h20" />
-      <path d="M8 21h8M12 18v3" />
-      <circle cx="5.5" cy="5.5" r=".75" fill="currentColor" strokeWidth="0" />
-      <circle cx="8.5" cy="5.5" r=".75" fill="currentColor" strokeWidth="0" />
-    </svg>
-  )
-}
-
-function AutomationIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  )
-}
-
-function AuditIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="11" cy="11" r="6" />
-      <path d="M21 21l-4.35-4.35" />
-      <path d="M11 8v3l2 2" />
-    </svg>
-  )
-}
+const PortalIcon = Globe
+const AutomationIcon = Zap
+const AuditIcon = SearchCheck
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 const SERVICES = [
@@ -95,23 +69,15 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="section-padding"
-      style={{ backgroundColor: 'var(--bg-base)' }}
+      className="section-py"
+      style={{ backgroundColor: 'var(--bg-surface)' }}
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
         <div className="mb-16 max-w-2xl">
-          <p
-            className="font-mono text-xs tracking-widest uppercase mb-4"
-            style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
-          >
-            &lt; SERVICES /&gt;
-          </p>
-          <h2
-            className="text-3xl md:text-4xl font-bold leading-tight mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <p className="eyebrow mb-4">Services</p>
+          <h2 className="section-title mb-4">
             What We Build
           </h2>
           <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>
@@ -132,16 +98,12 @@ export default function Services() {
               <m.article
                 key={id}
                 variants={cardVariant}
-                className="card-glow group relative flex flex-col rounded-xl border overflow-hidden transition-transform duration-300 hover:-translate-y-1"
-                style={{
-                  backgroundColor: 'var(--bg-card)',
-                  borderColor:     'var(--border-subtle)',
-                }}
+                className="card group relative flex flex-col overflow-hidden"
               >
-                {/* Gold top accent line — fades right */}
+                {/* Top accent line — fades right */}
                 <div
                   className="h-px w-full flex-shrink-0"
-                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, transparent 65%)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 35%, transparent 70%)' }}
                   aria-hidden="true"
                 />
 
@@ -150,24 +112,21 @@ export default function Services() {
                   {/* Number (watermark) + icon */}
                   <div className="flex items-start justify-between">
                     <span
-                      className="font-mono text-4xl font-bold leading-none select-none"
-                      style={{ color: 'rgba(200, 151, 47, 0.13)', fontFamily: 'var(--font-jetbrains-mono)' }}
+                      className="text-4xl font-bold leading-none select-none"
+                      style={{ color: 'rgba(59, 130, 246, 0.22)' }}
                       aria-hidden="true"
                     >
                       {number}
                     </span>
-                    <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg flex-shrink-0"
-                      style={{ backgroundColor: 'rgba(200, 151, 47, 0.1)', color: 'var(--accent)' }}
-                    >
-                      <Icon />
+                    <div className="icon-tile">
+                      <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
                     </div>
                   </div>
 
                   {/* Outcome — what the client actually gets */}
                   <p
                     className="text-sm font-semibold leading-snug"
-                    style={{ color: 'var(--accent)' }}
+                    style={{ color: 'var(--accent-2)' }}
                   >
                     {outcome}
                   </p>
@@ -192,8 +151,8 @@ export default function Services() {
                         key={tag}
                         className="text-xs px-2.5 py-1 rounded-md"
                         style={{
-                          backgroundColor: 'rgba(200, 151, 47, 0.06)',
-                          color:           'var(--text-muted)',
+                          backgroundColor: 'rgba(59, 130, 246, 0.08)',
+                          color:           'var(--text-secondary)',
                           border:          '1px solid var(--border-subtle)',
                         }}
                       >
@@ -205,10 +164,8 @@ export default function Services() {
                   {/* Ghost CTA */}
                   <button
                     onClick={() => scrollToContact(trackId)}
-                    className="group/link flex items-center gap-1.5 text-sm font-medium w-fit cursor-pointer transition-colors duration-200"
-                    style={{ color: 'var(--accent)' }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
+                    className="group/link flex items-center gap-1.5 text-sm font-medium w-fit min-h-[44px] cursor-pointer transition-colors duration-200"
+                    style={{ color: 'var(--accent-light)' }}
                     aria-label={`Discuss ${heading} with us`}
                   >
                     Discuss this

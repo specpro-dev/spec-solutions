@@ -1,78 +1,56 @@
+import Image from 'next/image'
+
+// CODELYNT logo — renders the official SVG assets from /public/brand/svg.
+// Never recolor with CSS filters, stretch, add shadows, or place on busy backgrounds.
+// Clear space: pad the wrapper by 0.5 × symbol height when placing in layouts.
+
+type Variant = 'horizontal' | 'symbol'
+type Tone = 'onDark' | 'onLight' | 'white' | 'black'
+
 interface LogoProps {
-  size?: number
-  variant?: 'horizontal' | 'stacked' | 'light' | 'dark'
+  variant?: Variant
+  tone?: Tone
+  /** Rendered height in px (default 28). Width follows the asset ratio. */
+  height?: number
   className?: string
+  priority?: boolean
 }
 
-// C letterform — open bowl in a 16×25 design-unit space.
-const S_PATH =
-  'M 15,6 C 14,3 12,1.5 8,1.5 C 3.5,1.5 0,4.5 0,12.5 C 0,20.5 3.5,25 8,25 C 12,25 14,23.5 15,20'
+const RATIO = { horizontal: 1239 / 229, symbol: 1 } as const
 
-// L letterform — same 16×25 space and stroke weight as C.
-const G_PATH =
-  'M 2,1.5 L 2,25 L 15,25'
-
-// CL monogram — C and L letterforms side-by-side, accent gold stroke.
-// viewBox: 44 × 30, each letter occupies 16 units, 6-unit gap, 2-unit outer padding.
-function Monogram({ className = '' }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 44 30"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      className={className}
-    >
-      <g
-        stroke="var(--accent)"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path transform="translate(2, 2)" d={S_PATH} />
-        <path transform="translate(24, 2)" d={G_PATH} />
-      </g>
-    </svg>
-  )
+const SRC: Record<Variant, Record<Tone, string>> = {
+  horizontal: {
+    onDark: '/brand/svg/logo-on-dark.svg',
+    onLight: '/brand/svg/logo-on-light.svg',
+    white: '/brand/svg/logo-white.svg',
+    black: '/brand/svg/logo-black.svg',
+  },
+  symbol: {
+    onDark: '/brand/svg/symbol.svg',
+    onLight: '/brand/svg/symbol.svg',
+    white: '/brand/svg/symbol-white.svg',
+    black: '/brand/svg/symbol-black.svg',
+  },
 }
 
-// Wordmark — "CODELYNT" bold, Plus Jakarta Sans, --text-primary.
-function Wordmark({ align = 'left' }: { align?: 'left' | 'center' }) {
-  const cls = align === 'center' ? 'items-center' : 'items-start'
+export default function Logo({
+  variant = 'horizontal',
+  tone = 'onDark',
+  height = 28,
+  className = '',
+  priority = false,
+}: LogoProps) {
+  const width = Math.round(height * RATIO[variant])
   return (
-    <div className={`flex flex-col ${cls}`} style={{ color: 'var(--text-primary)' }}>
-      <span
-        className="block font-bold uppercase leading-none"
-        style={{ letterSpacing: '0.22em', fontSize: '14px' }}
-      >
-        CODELYNT
-      </span>
-    </div>
-  )
-}
-
-export default function Logo({ variant = 'horizontal', className = '' }: LogoProps) {
-  if (variant === 'stacked') {
-    return (
-      <div
-        className={`flex flex-col items-center gap-2.5 ${className}`}
-        role="img"
-        aria-label="CodeLynt"
-      >
-        <Monogram className="h-10 w-auto" />
-        <Wordmark align="center" />
-      </div>
-    )
-  }
-
-  return (
-    <div
-      className={`flex items-center gap-3 ${className}`}
-      role="img"
-      aria-label="CodeLynt"
-    >
-      <Monogram className="h-8 w-auto" />
-      <Wordmark align="left" />
-    </div>
+    <Image
+      src={SRC[variant][tone]}
+      alt="CODELYNT"
+      width={width}
+      height={height}
+      unoptimized
+      priority={priority}
+      className={`block w-auto select-none ${className}`}
+      style={{ height, width }}
+    />
   )
 }

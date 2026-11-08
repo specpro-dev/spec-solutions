@@ -42,16 +42,11 @@ const FOUNDERS = [
 function Avatar({ initials }: { initials: string }) {
   return (
     <div
-      className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 border"
-      style={{
-        backgroundColor: 'rgba(200, 151, 47, 0.08)',
-        borderColor: 'var(--border-subtle)',
-      }}
+      className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-brand"
       aria-hidden="true"
     >
       <span
-        className="font-mono text-lg font-bold select-none"
-        style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
+        className="text-lg font-bold select-none text-white"
       >
         {initials}
       </span>
@@ -97,24 +92,16 @@ export default function Team() {
   return (
     <section
       id="team"
-      className="section-padding"
+      className="section-py"
       style={{ backgroundColor: 'var(--bg-base)' }}
       aria-label="Our team"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section header */}
         <div className="mb-16 max-w-2xl">
-          <p
-            className="font-mono text-xs tracking-widest uppercase mb-4"
-            style={{ color: 'var(--accent)', fontFamily: 'var(--font-jetbrains-mono)' }}
-          >
-            &lt; TEAM /&gt;
-          </p>
-          <h2
-            className="text-3xl md:text-4xl font-bold leading-tight mb-4"
-            style={{ color: 'var(--text-primary)' }}
-          >
+          <p className="eyebrow mb-4">Team</p>
+          <h2 className="section-title mb-4">
             The Team
           </h2>
           <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>
@@ -135,13 +122,12 @@ export default function Team() {
               <m.div
                 key={name}
                 variants={prefersReduced ? itemStatic : item}
-                className="card-glow rounded-xl border overflow-hidden flex flex-col"
-                style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border-subtle)' }}
+                className="card overflow-hidden flex flex-col"
               >
-                {/* Gold top accent */}
+                {/* Top accent */}
                 <div
                   className="h-px w-full flex-shrink-0"
-                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, transparent 65%)' }}
+                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 35%, transparent 70%)' }}
                   aria-hidden="true"
                 />
 
@@ -158,7 +144,7 @@ export default function Team() {
                       </p>
                       <p
                         className="text-sm font-medium mt-0.5"
-                        style={{ color: 'var(--accent)' }}
+                        style={{ color: 'var(--accent-light)' }}
                       >
                         {role}
                       </p>
@@ -176,10 +162,10 @@ export default function Team() {
                       href={linkedIn}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors duration-200"
-                      style={{ color: 'var(--text-muted)' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)' }}
+                      className="inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] transition-colors duration-200"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)' }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                       aria-label={`${name} on LinkedIn`}
                     >
                       <LinkedInIcon />
@@ -190,10 +176,10 @@ export default function Team() {
                       href={portfolio}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium transition-colors duration-200"
-                      style={{ color: 'var(--text-muted)' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent)' }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-muted)' }}
+                      className="inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] transition-colors duration-200"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)' }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
                       aria-label={`${name}'s portfolio`}
                     >
                       <ExternalIcon />
