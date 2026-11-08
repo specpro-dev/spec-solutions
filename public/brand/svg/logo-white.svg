@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-7 -7 1239 229" role="img" aria-label="CODELYNT"><title>CODELYNT</title>
+<g transform="scale(2.15)"><path d="M0 32 L53 0 L100 26 L79.4 38 L53 23 L29 37.5 L29 62.5 L53 77 L79.4 62 L100 74 L53 100 L0 68 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/></g>
+<g transform="translate(275 57.5)"><g aria-label="CODELYNT">
+<path fill="none" stroke="#FFFFFF" stroke-width="24" d="M95.2 29.9 A45 38 0 1 0 95.2 70.1" transform="translate(0 0)"/>
+<ellipse fill="none" stroke="#FFFFFF" stroke-width="24" cx="187" cy="50" rx="45" ry="38"/>
+<path fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linejoin="miter" d="M274 12 H312 A38 38 0 0 1 312 88 H274 Z"/>
+<g transform="translate(392 0)"><rect width="84" height="20" fill="#FFFFFF"/><rect y="40" width="84" height="20" fill="#FFFFFF"/><rect y="80" width="84" height="20" fill="#FFFFFF"/></g>
+<path fill="#FFFFFF" transform="translate(494 0)" d="M0 0H24V80H70V100H0Z"/>
+<path fill="#FFFFFF" transform="translate(578 0)" d="M0 0H28L60 44L92 0H120L74 62V100H46V62Z"/>
+<path fill="#FFFFFF" transform="translate(716 0)" d="M0 100V0H26L78 62V0H104V100H78L26 38V100Z"/>
+<path fill="#FFFFFF" transform="translate(838 0)" d="M0 0H112V20H68V100H44V20H0Z"/></g></g>
+</svg>
