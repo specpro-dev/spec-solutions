@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import MotionWrapper from '@/components/ui/MotionWrapper'
-import Link from 'next/link'
+import { ArrowUpRight, Check } from 'lucide-react'
 
 // PORTFOLIO SECTION
 //
@@ -44,86 +44,67 @@ export default function Portfolio() {
   return (
     <section
       id="portfolio"
-      className="section-padding bg-navy-dark"
+      className="section-py bg-bg-base"
       aria-label="Portfolio"
     >
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <MotionWrapper className="text-center mb-4">
-          <p className="text-gold text-sm font-semibold tracking-widest uppercase mb-3">
-            The work
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-white max-w-2xl mx-auto">
+        <MotionWrapper className="text-center mb-12">
+          <p className="eyebrow mb-3">The work</p>
+          <h2 className="section-title max-w-2xl mx-auto">
             What we build looks like this
           </h2>
-        </MotionWrapper>
-
-        <MotionWrapper className="text-center mb-16" delay={0.1}>
-          <p className="text-white/50 text-sm">
-            Both designs below are concept mockups — not live client sites.
-          </p>
         </MotionWrapper>
 
         {/* 2-card grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {mockups.map((mockup, i) => (
             <MotionWrapper key={mockup.id} delay={i * 0.15}>
-              <article
-                id={`portfolio-${mockup.id}`}
-                className="bg-navy rounded-2xl border border-white/8 overflow-hidden hover:border-gold/20 transition-colors duration-300 group"
-              >
-                {/* Mockup image — lazy loaded, explicit dimensions prevent layout shift */}
-                <div className="relative w-full overflow-hidden bg-navy-light">
-                  {/* ⚠️ PLACEHOLDER: Replace with actual client work before launch */}
+              <article id={`portfolio-${mockup.id}`} className="card h-full overflow-hidden group">
+                {/* Cover image with navy overlay for text legibility */}
+                <div className="relative w-full overflow-hidden">
                   <Image
                     src={mockup.src}
                     alt={mockup.alt}
                     width={800}
                     height={600}
-                    className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                    loading="lazy"
+                    className="w-full h-auto object-cover motion-safe:group-hover:scale-[1.02] transition-transform duration-500"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
-
-
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none"
+                    style={{ background: 'linear-gradient(to top, #0B1020 0%, rgba(11,16,32,0.85) 40%, transparent 100%)' }}
+                    aria-hidden="true"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 p-6">
+                    <span className="eyebrow">{mockup.badge}</span>
+                    <h3 className="mt-2 text-lg font-semibold text-text-primary">{mockup.title}</h3>
+                  </div>
                 </div>
 
                 {/* Card content */}
                 <div className="p-6">
-                  <span className="text-gold text-xs font-semibold tracking-widest uppercase">
-                    {mockup.badge}
-                  </span>
-                  <h3 className="mt-2 text-lg font-bold text-white">{mockup.title}</h3>
-                  <p className="mt-2 text-white/60 text-sm leading-relaxed">
+                  <p className="text-text-secondary text-sm leading-relaxed">
                     {mockup.description}
                   </p>
-                  <div className="mt-2">
-                    <Link href={mockup.liveUrl} className="text-gold bg-gold/10 hover:bg-gold/20 px-3 py-2 rounded-lg text-sm font-semibold tracking-widest uppercase">
+                  <div className="mt-4">
+                    <a
+                      href={mockup.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary text-sm"
+                      aria-label={`${mockup.title} — view live project (opens in a new tab)`}
+                    >
                       Live Project
-                    </Link>
+                      <ArrowUpRight size={16} strokeWidth={1.75} aria-hidden="true" />
+                    </a>
                   </div>
 
-                  {/* Bullet points */}
-                  <ul className="mt-4 space-y-2.5" aria-label="What this design solves">
+                  <ul className="mt-5 space-y-2.5" aria-label="Project highlights">
                     {mockup.points.map((point) => (
                       <li key={point} className="flex items-start gap-2.5">
-                        <svg
-                          className="flex-shrink-0 mt-0.5"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M2 7l3.5 3.5L12 3"
-                            stroke="#C9963A"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <span className="text-white/70 text-sm">{point}</span>
+                        <Check size={16} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-accent-2" aria-hidden="true" />
+                        <span className="text-text-secondary text-sm">{point}</span>
                       </li>
                     ))}
                   </ul>
