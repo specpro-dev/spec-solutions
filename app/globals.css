@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── SpecGig Design Tokens ──────────────────────────────────────────── */
+/* ─── CodeLynt Design Tokens ──────────────────────────────────────────── */
 :root {
   /* Primary backgrounds */
   --bg-base:        #080C14;   /* Near-black, deep navy-charcoal */

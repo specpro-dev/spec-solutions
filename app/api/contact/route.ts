@@ -78,11 +78,11 @@ export async function POST(request: NextRequest) {
   const resend = new Resend(config.apiKey)
   try {
     const { error } = await resend.emails.send({
-      from: 'SpecGig <onboarding@resend.dev>', // PLACEHOLDER: Change to your verified domain before launch
+      from: 'CodeLynt <onboarding@resend.dev>', // PLACEHOLDER: Change to your verified domain before launch
       to: [config.toEmail],
       subject: `New lead: ${businessName} — ${goal}`,
       text: `
-New contact form submission from SpecGig
+New contact form submission from CodeLynt
 
 Name: ${name}
 Business: ${businessName}
@@ -93,7 +93,7 @@ Submitted at: ${new Date().toISOString()}
       `.trim(),
       html: `
         <div style="font-family: system-ui, sans-serif; max-width: 520px; padding: 24px;">
-          <h2 style="color: #0F1B3C; margin-top: 0;">New lead from SpecGig</h2>
+          <h2 style="color: #0F1B3C; margin-top: 0;">New lead from CodeLynt</h2>
           <table style="width: 100%; border-collapse: collapse;">
             <tr>
               <td style="padding: 8px 0; color: #6B7280; font-size: 13px; width: 120px;">Name</td>

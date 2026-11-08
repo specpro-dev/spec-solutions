@@ -1,5 +1,5 @@
 #!/bin/bash
-# Setup script for SpecGig
+# Setup script for CodeLynt
 # Run this once after cloning / first setup
 # Usage: bash scripts/setup.sh
 

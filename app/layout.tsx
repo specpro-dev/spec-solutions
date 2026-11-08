@@ -25,9 +25,9 @@ const jetbrainsMono = JetBrains_Mono({
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://specsolutions.lk'
 
 export const metadata: Metadata = {
-  title: 'Custom Software Development for Businesses in Sri Lanka | SpecGig',
+  title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
   description:
-    'SpecGig builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates. Based in Kalutara & Colombo.',
+    'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates. Based in Kalutara & Colombo.',
   keywords: [
     'custom software development Sri Lanka',
     'web application development Kalutara',
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     'Colombo web developer',
     'custom coded website Sri Lanka',
   ],
-  authors: [{ name: 'SpecGig', url: siteUrl }],
-  creator: 'SpecGig',
-  publisher: 'SpecGig',
+  authors: [{ name: 'CodeLynt', url: siteUrl }],
+  creator: 'CodeLynt',
+  publisher: 'CodeLynt',
   robots: {
     index: true,
     follow: true,
@@ -57,25 +57,25 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: siteUrl,
-    siteName: 'SpecGig',
+    siteName: 'CodeLynt',
     locale: 'en_LK',
-    title: 'Custom Software Development for Businesses in Sri Lanka | SpecGig',
+    title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
     description:
-      'SpecGig builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
+      'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
     images: [
       {
         url: `${siteUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'SpecGig — Custom Software for Sri Lankan Businesses',
+        alt: 'CodeLynt — Custom Software for Sri Lankan Businesses',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Custom Software Development for Businesses in Sri Lanka | SpecGig',
+    title: 'Custom Software Development for Businesses in Sri Lanka | CodeLynt',
     description:
-      'SpecGig builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
+      'CodeLynt builds custom web applications, booking systems, and automation tools for businesses in Sri Lanka. Custom-coded, Lighthouse 95+, no templates.',
     images: [`${siteUrl}/og-image.png`],
   },
   icons: {
