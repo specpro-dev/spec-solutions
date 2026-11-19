@@ -1,46 +1,26 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
+import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
-import Logo from './Logo'
-import { trackEvent } from '@/lib/analytics'
+import Logo from '@/components/ui/Logo'
+import SectionLink from '@/components/ui/SectionLink'
+import { linkableSections, navSections, site } from '@/config/site'
 
-// Careers omitted: no page or anchor exists yet.
-const NAV_LINKS = [
-  { label: 'Services', id: 'services' },
-  { label: 'Solutions', id: 'portfolio' },
-  { label: 'About', id: 'team' },
-] as const
-
-function scrollToSection(id: string, e: React.MouseEvent) {
-  e.preventDefault()
-  const el = document.getElementById(id)
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth' })
-    history.pushState(null, '', `/${id}`)
-  }
-}
+const contactTrack = { event: 'cta_click', params: { cta_label: 'Get in Touch', section: 'navbar' } }
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const rafRef = useRef<number>(0)
   const drawerRef = useRef<HTMLDivElement>(null)
   const openerRef = useRef<HTMLButtonElement>(null)
   const prefersReduced = useReducedMotion()
 
   useEffect(() => {
-    const onScroll = () => {
-      cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => setScrolled(window.scrollY > 40))
-    }
+    const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      cancelAnimationFrame(rafRef.current)
-    }
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   const closeMenu = useCallback(() => {
@@ -48,31 +28,25 @@ export default function NavBar() {
     openerRef.current?.focus()
   }, [])
 
-  // Scroll lock, ESC to close, and focus trap while the drawer is open
   useEffect(() => {
     if (!menuOpen) return
     document.body.style.overflow = 'hidden'
-    const root = drawerRef.current
     const focusables = () =>
-      Array.from(root?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
+      Array.from(drawerRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
     focusables()[0]?.focus()
 
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeMenu()
-        return
-      }
+      if (e.key === 'Escape') return closeMenu()
       if (e.key !== 'Tab') return
       const items = focusables()
-      if (items.length === 0) return
       const first = items[0]
       const last = items[items.length - 1]
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault()
-        last.focus()
+        last?.focus()
       } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault()
-        first.focus()
+        first?.focus()
       }
     }
     document.addEventListener('keydown', onKey)
@@ -82,61 +56,43 @@ export default function NavBar() {
     }
   }, [menuOpen, closeMenu])
 
-  const goContact = (e: React.MouseEvent, afterClick?: () => void) => {
-    scrollToSection('contact', e)
-    afterClick?.()
-    trackEvent('cta_click', { cta_label: 'Get in Touch', section: 'navbar' })
-  }
+  const hideMenu = () => setMenuOpen(false)
 
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50">
         <div
           className={`border-b transition-colors duration-200 ${
-            scrolled
-              ? 'bg-bg-base/80 backdrop-blur-md border-[var(--border-subtle)]'
-              : 'bg-transparent border-transparent'
+            scrolled ? 'bg-bg-base/80 backdrop-blur-md border-border-subtle' : 'bg-transparent border-transparent'
           }`}
         >
-          <nav
-            className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
-            aria-label="Main navigation"
-          >
-            <a
-              href="/"
-              aria-label="CODELYNT — return to top"
-              onClick={e => {
-                e.preventDefault()
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-                history.pushState(null, '', '/')
-              }}
-            >
+          <nav className="page-container h-16 flex items-center justify-between" aria-label="Main navigation">
+            <SectionLink to="top" aria-label={`${site.name} — return to top`}>
               <Logo height={28} priority className="md:hidden" />
               <Logo height={32} priority className="hidden md:block" />
-            </a>
+            </SectionLink>
 
-            <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
-              {NAV_LINKS.map(({ label, id }) => (
+            <ul className="hidden md:flex items-center gap-8">
+              {navSections.map(id => (
                 <li key={id}>
-                  <a
-                    href={`/${id}`}
+                  <SectionLink
+                    to={id}
                     className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200"
-                    onClick={e => scrollToSection(id, e)}
                   >
-                    {label}
-                  </a>
+                    {linkableSections[id]}
+                  </SectionLink>
                 </li>
               ))}
             </ul>
 
             <div className="flex items-center gap-3">
-              <a href="/contact" className="btn btn-primary hidden md:inline-flex" onClick={e => goContact(e)}>
+              <SectionLink to="contact" track={contactTrack} className="btn btn-primary hidden md:inline-flex">
                 Get in Touch →
-              </a>
+              </SectionLink>
 
               <button
                 ref={openerRef}
-                className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer focus-visible:outline-2 focus-visible:outline-[#60A5FA]"
+                className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer focus-ring"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
@@ -151,7 +107,7 @@ export default function NavBar() {
 
       <AnimatePresence>
         {menuOpen && (
-          <motion.div
+          <m.div
             ref={drawerRef}
             id="mobile-menu"
             role="dialog"
@@ -175,31 +131,24 @@ export default function NavBar() {
             </div>
 
             <nav className="flex flex-col mt-8" aria-label="Mobile navigation">
-              {NAV_LINKS.map(({ label, id }) => (
-                <a
+              {navSections.map(id => (
+                <SectionLink
                   key={id}
-                  href={`/${id}`}
-                  onClick={e => {
-                    scrollToSection(id, e)
-                    setMenuOpen(false)
-                  }}
-                  className="py-5 text-2xl font-semibold tracking-tight border-b border-[var(--border-subtle)] text-text-primary hover:text-accent-light transition-colors duration-200"
+                  to={id}
+                  onNavigate={hideMenu}
+                  className="py-5 text-2xl font-semibold tracking-tight border-b border-border-subtle text-text-primary hover:text-accent-light transition-colors duration-200"
                 >
-                  {label}
-                </a>
+                  {linkableSections[id]}
+                </SectionLink>
               ))}
             </nav>
 
             <div className="mt-auto">
-              <a
-                href="/contact"
-                onClick={e => goContact(e, () => setMenuOpen(false))}
-                className="btn btn-primary w-full"
-              >
+              <SectionLink to="contact" track={contactTrack} onNavigate={hideMenu} className="btn btn-primary w-full">
                 Get in Touch →
-              </a>
+              </SectionLink>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

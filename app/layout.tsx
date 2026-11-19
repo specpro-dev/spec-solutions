@@ -1,10 +1,12 @@
 import type { Metadata, Viewport } from 'next'
 import { Sora } from 'next/font/google'
 import './globals.css'
-import Analytics from '@/components/analytics/Analytics'
-import WhatsAppButton from '@/components/ui/WhatsAppButton'
+import GoogleAnalytics from '@/lib/analytics/GoogleAnalytics'
+import WhatsAppButton from '@/components/layout/WhatsAppButton'
+import { MotionProvider } from '@/components/ui/Reveal'
+import { site } from '@/config/site'
+import { colors } from '@/config/theme'
 
-// ─── Fonts ────────────────────────────────────────────────────────────────────
 const sora = Sora({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -12,27 +14,21 @@ const sora = Sora({
   display: 'swap',
 })
 
-// ─── Metadata ─────────────────────────────────────────────────────────────────
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://specsolutions.lk'
-const title = 'CODELYNT — Build. Innovate. Transform.'
-const description =
-  'A modern technology company building AI-powered solutions and scalable digital products.'
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title,
-  description,
+  metadataBase: new URL(site.url),
+  title: site.title,
+  description: site.description,
   keywords: [
     'AI-powered solutions',
     'custom software development',
     'scalable digital products',
     'web application development',
     'automation',
-    'Codelynt',
+    site.displayName,
   ],
-  authors: [{ name: 'Codelynt', url: siteUrl }],
-  creator: 'Codelynt',
-  publisher: 'Codelynt',
+  authors: [{ name: site.displayName, url: site.url }],
+  creator: site.displayName,
+  publisher: site.displayName,
   robots: {
     index: true,
     follow: true,
@@ -44,20 +40,20 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: siteUrl,
+    canonical: site.url,
   },
   openGraph: {
     type: 'website',
-    url: siteUrl,
-    siteName: 'CODELYNT',
+    url: site.url,
+    siteName: site.name,
     locale: 'en_US',
-    title,
-    description,
+    title: site.title,
+    description: site.description,
   },
   twitter: {
     card: 'summary_large_image',
-    title,
-    description,
+    title: site.title,
+    description: site.description,
   },
   icons: {
     icon: [
@@ -74,22 +70,18 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0B1020',
+  themeColor: colors['bg-base'],
   width: 'device-width',
   initialScale: 1,
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      dir="ltr"
-      className={`${sora.variable}`}
-    >
+    <html lang="en" dir="ltr" className={sora.variable}>
       <body>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <WhatsAppButton />
-        <Analytics />
+        <GoogleAnalytics />
       </body>
     </html>
   )

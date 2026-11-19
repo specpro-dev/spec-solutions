@@ -1,16 +1,9 @@
-import MotionWrapper from '@/components/ui/MotionWrapper'
+import Section from '@/components/ui/Section'
+import SectionHeader from '@/components/ui/SectionHeader'
+import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 
-// WHY US / OUR APPROACH SECTION
-//
-// Positions Codelynt as software engineers, not designers-who-also-code.
-// Deliberately avoids the standard "3 icons in a row" layout — uses a numbered
-// approach that feels engineering-specific and structured, not generic agency copy.
-//
-// ⚠️  IMPORTANT — "95+ Lighthouse score" copy:
-//     This claim is conditional on the actual deployed score.
-//     Verify the Lighthouse audit passes LAST, right before launch.
-//     If the score is in the 80s, this copy must be removed or qualified.
-//     See: implementation plan, WhyUs section note.
+// The "95+ Lighthouse" claims here and in ProblemSolution must match the deployed
+// score: run Lighthouse right before launch and qualify or remove them if it's lower.
 
 const differentiators = [
   {
@@ -41,57 +34,37 @@ const differentiators = [
 
 export default function WhyUs() {
   return (
-    <section
-      id="why-us"
-      className="section-py bg-bg-surface"
-      aria-label="Why Codelynt"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <MotionWrapper className="mb-16">
-          <p className="eyebrow mb-3">
-            Our approach
-          </p>
-          <h2 className="section-title max-w-xl">
-            Software engineers, not designers who also code
-          </h2>
-          <p className="mt-4 text-text-secondary max-w-lg leading-relaxed">
-            The distinction matters. An engineer thinks about performance budgets,
-            security surface area, and what happens when your business grows.
-            A designer thinks about what looks good today.
-          </p>
-        </MotionWrapper>
+    <Section id="why-us" label="Why Codelynt" tone="surface">
+      <SectionHeader
+        eyebrow="Our approach"
+        title="Software engineers, not designers who also code"
+        lede="The distinction matters. An engineer thinks about performance budgets, security surface area, and what happens when your business grows. A designer thinks about what looks good today."
+      />
 
-        {/* Differentiators — staggered numbered list layout */}
-        <div className="space-y-0 divide-y divide-[var(--border-subtle)]">
-          {differentiators.map((item, i) => (
-            <MotionWrapper key={item.number} delay={i * 0.1}>
-              <div className="py-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start group">
-                {/* Number */}
-                <div
-                  className="text-5xl font-bold text-accent/20 group-hover:text-accent/30 transition-colors duration-300 select-none leading-none"
-                  aria-hidden="true"
-                >
-                  {item.number}
-                </div>
-
-                {/* Content */}
-                <div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">{item.title}</h3>
-                  <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
-                </div>
-
-                {/* Tag */}
-                <div className="md:text-right">
-                  <span className="inline-block px-3 py-1.5 rounded-lg bg-accent/10 border border-[var(--border-subtle)] text-accent-light text-xs font-semibold">
-                    {item.tag}
-                  </span>
-                </div>
-              </div>
-            </MotionWrapper>
-          ))}
-        </div>
-      </div>
-    </section>
+      <RevealGroup className="divide-y divide-border-subtle">
+        {differentiators.map(item => (
+          <RevealItem
+            key={item.number}
+            className="py-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start group"
+          >
+            <div
+              className="text-5xl font-bold text-accent/20 group-hover:text-accent/30 transition-colors duration-300 select-none leading-none"
+              aria-hidden="true"
+            >
+              {item.number}
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-text-primary mb-2">{item.title}</h3>
+              <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
+            </div>
+            <div className="md:text-right">
+              <span className="inline-block px-3 py-1.5 rounded-lg bg-accent/10 border border-border-subtle text-accent-light text-xs font-semibold">
+                {item.tag}
+              </span>
+            </div>
+          </RevealItem>
+        ))}
+      </RevealGroup>
+    </Section>
   )
 }

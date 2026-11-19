@@ -1,13 +1,9 @@
 import type { MetadataRoute } from 'next'
+import { site } from '@/config/site'
 
 export default function robots(): MetadataRoute.Robots {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://nextintakedigital.com'
-
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    rules: { userAgent: '*', allow: '/' },
+    sitemap: `${site.url}/sitemap.xml`,
   }
 }

@@ -1,14 +1,15 @@
-'use client'
+import { ArrowUpRight } from 'lucide-react'
+import Section from '@/components/ui/Section'
+import SectionHeader from '@/components/ui/SectionHeader'
+import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
 
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
-
-// ─── Data ─────────────────────────────────────────────────────────────────────
-const FOUNDERS = [
+const MEMBERS = [
   {
     initials: 'NU',
     name: 'Nashan Unais',
     role: 'Co-Founder & Frontend Engineer',
-    credential: 'Builds production web applications with React and Next.js — focused on clean architecture, TypeScript, and interfaces that perform under real load. Software Engineer at Intervest Software Technologies. BSc Computer Science, University of Westminster (via IIT Sri Lanka).',
+    credential:
+      'Builds production web applications with React and Next.js — focused on clean architecture, TypeScript, and interfaces that perform under real load. Software Engineer at Intervest Software Technologies. BSc Computer Science, University of Westminster (via IIT Sri Lanka).',
     linkedIn: 'https://www.linkedin.com/in/nashan-unais/',
     portfolio: 'https://nashanunais.vercel.app/',
   },
@@ -16,7 +17,8 @@ const FOUNDERS = [
     initials: 'AF',
     name: 'Ashfaq Farleen',
     role: 'Co-Founder & Full Stack Engineer',
-    credential: 'Full-stack engineer across React, Node.js, Spring Boot, and .NET — with hands-on experience in automation pipelines, backend services, and freelance delivery. Software Engineer at Aventude. BSc Computer Science, IIT Sri Lanka.',
+    credential:
+      'Full-stack engineer across React, Node.js, Spring Boot, and .NET — with hands-on experience in automation pipelines, backend services, and freelance delivery. Software Engineer at Aventude. BSc Computer Science, IIT Sri Lanka.',
     linkedIn: 'https://www.linkedin.com/in/ashfaq-farleen/',
     portfolio: 'https://ashfaqfarleen.vercel.app/',
   },
@@ -24,7 +26,8 @@ const FOUNDERS = [
     initials: 'MA',
     name: 'Mohamed Ali Althaf Mohamed',
     role: 'Software Engineer',
-    credential: 'ML/computer vision researcher — PyTorch, TensorFlow, React, Node.js. BSc (Hons) Computer Science, University of Westminster (First Class).',
+    credential:
+      'ML/computer vision researcher — PyTorch, TensorFlow, React, Node.js. BSc (Hons) Computer Science, University of Westminster (First Class).',
     linkedIn: 'https://www.linkedin.com/in/althaf-ali-dev',
     portfolio: 'https://althafali.vercel.app/',
   },
@@ -32,166 +35,76 @@ const FOUNDERS = [
     initials: 'SM',
     name: 'Saleem Malik',
     role: 'Software Engineer',
-    credential: 'Full-stack engineer across Angular, React, Django, Node.js, with applied post-quantum cryptography research. BSc (Hons) Computer Science, University of Westminster.',
+    credential:
+      'Full-stack engineer across Angular, React, Django, Node.js, with applied post-quantum cryptography research. BSc (Hons) Computer Science, University of Westminster.',
     linkedIn: 'https://linkedin.com/in/saleemSE',
     portfolio: 'https://github.com/saleemsgit',
   },
 ] as const
 
-// ─── Placeholder avatar ────────────────────────────────────────────────────────
-function Avatar({ initials }: { initials: string }) {
-  return (
-    <div
-      className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-brand"
-      aria-hidden="true"
-    >
-      <span
-        className="text-lg font-bold select-none text-white"
-      >
-        {initials}
-      </span>
-    </div>
-  )
-}
-
-// ─── Link icon ────────────────────────────────────────────────────────────────
+// lucide-react no longer ships brand icons.
 function LinkedInIcon() {
   return (
     <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.2" />
-      <path d="M3.5 5.5v5M3.5 3.5v.01M6 5.5v5M6 7.5a2 2 0 0 1 4 0v3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      <path
+        d="M3.5 5.5v5M3.5 3.5v.01M6 5.5v5M6 7.5a2 2 0 0 1 4 0v3"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+      />
     </svg>
   )
 }
 
-function ExternalIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-      <path d="M2 10L10 2M10 2H5M10 2v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
+const linkCls =
+  'inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] text-text-secondary hover:text-accent-light transition-colors duration-200'
 
-// ─── Animation variants ────────────────────────────────────────────────────────
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.05 } },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-}
-
-const itemStatic = { hidden: { opacity: 1, y: 0 }, visible: { opacity: 1, y: 0 } }
-
-// ─── Component ────────────────────────────────────────────────────────────────
 export default function Team() {
-  const prefersReduced = useReducedMotion()
-
   return (
-    <section
-      id="team"
-      className="section-py"
-      style={{ backgroundColor: 'var(--bg-base)' }}
-      aria-label="Our team"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <Section id="team" label="Our team" tone="base">
+      <SectionHeader
+        eyebrow="Team"
+        title="The Team"
+        lede="One goal: software that does exactly what it was built to do."
+      />
 
-        {/* Section header */}
-        <div className="mb-16 max-w-2xl">
-          <p className="eyebrow mb-4">Team</p>
-          <h2 className="section-title mb-4">
-            The Team
-          </h2>
-          <p className="text-base md:text-lg" style={{ color: 'var(--text-secondary)' }}>
-            One goal: software that does exactly what it was built to do.
-          </p>
-        </div>
+      <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
+        {MEMBERS.map(({ initials, name, role, credential, linkedIn, portfolio }) => (
+          <RevealItem key={name} className="card card-interactive overflow-hidden flex flex-col">
+            <div className="card-accent-line" aria-hidden="true" />
 
-        {/* Founder cards */}
-        <LazyMotion features={domAnimation}>
-          <m.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl"
-            variants={prefersReduced ? {} : container}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-8%' }}
-          >
-            {FOUNDERS.map(({ initials, name, role, credential, linkedIn, portfolio }) => (
-              <m.div
-                key={name}
-                variants={prefersReduced ? itemStatic : item}
-                className="card overflow-hidden flex flex-col"
-              >
-                {/* Top accent */}
+            <div className="flex flex-col gap-5 p-7">
+              <div className="flex items-center gap-4">
                 <div
-                  className="h-px w-full flex-shrink-0"
-                  style={{ background: 'linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 35%, transparent 70%)' }}
+                  className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-brand"
                   aria-hidden="true"
-                />
-
-                <div className="flex flex-col gap-5 p-7">
-                  {/* Avatar + name */}
-                  <div className="flex items-center gap-4">
-                    <Avatar initials={initials} />
-                    <div>
-                      <p
-                        className="font-bold text-base leading-snug"
-                        style={{ color: 'var(--text-primary)' }}
-                      >
-                        {name}
-                      </p>
-                      <p
-                        className="text-sm font-medium mt-0.5"
-                        style={{ color: 'var(--accent-light)' }}
-                      >
-                        {role}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Credential */}
-                  <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                    {credential}
-                  </p>
-
-                  {/* Links */}
-                  <div className="flex items-center gap-4 pt-1">
-                    <a
-                      href={linkedIn}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] transition-colors duration-200"
-                      style={{ color: 'var(--text-secondary)' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)' }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
-                      aria-label={`${name} on LinkedIn`}
-                    >
-                      <LinkedInIcon />
-                      LinkedIn
-                    </a>
-                    <span style={{ color: 'var(--border-subtle)' }}>·</span>
-                    <a
-                      href={portfolio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] transition-colors duration-200"
-                      style={{ color: 'var(--text-secondary)' }}
-                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = 'var(--accent-light)' }}
-                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'var(--text-secondary)' }}
-                      aria-label={`${name}'s portfolio`}
-                    >
-                      <ExternalIcon />
-                      Portfolio
-                    </a>
-                  </div>
+                >
+                  <span className="text-lg font-bold select-none text-white">{initials}</span>
                 </div>
-              </m.div>
-            ))}
-          </m.div>
-        </LazyMotion>
-      </div>
-    </section>
+                <div>
+                  <p className="font-bold text-base leading-snug text-text-primary">{name}</p>
+                  <p className="text-sm font-medium mt-0.5 text-accent-light">{role}</p>
+                </div>
+              </div>
+
+              <p className="text-sm leading-relaxed text-text-secondary">{credential}</p>
+
+              <div className="flex items-center gap-4 pt-1">
+                <a href={linkedIn} target="_blank" rel="noopener noreferrer" className={linkCls} aria-label={`${name} on LinkedIn`}>
+                  <LinkedInIcon />
+                  LinkedIn
+                </a>
+                <span className="text-border-subtle">·</span>
+                <a href={portfolio} target="_blank" rel="noopener noreferrer" className={linkCls} aria-label={`${name}'s portfolio`}>
+                  <ArrowUpRight size={12} strokeWidth={1.5} aria-hidden="true" />
+                  Portfolio
+                </a>
+              </div>
+            </div>
+          </RevealItem>
+        ))}
+      </RevealGroup>
+    </Section>
   )
 }

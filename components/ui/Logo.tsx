@@ -1,50 +1,28 @@
 import Image from 'next/image'
+import { site } from '@/config/site'
 
-// CODELYNT logo — renders the official SVG assets from /public/brand/svg.
-// Never recolor with CSS filters, stretch, add shadows, or place on busy backgrounds.
-// Clear space: pad the wrapper by 0.5 × symbol height when placing in layouts.
+// Official brand assets: never recolor with CSS filters, stretch, add shadows,
+// or place on busy backgrounds (see public/brand/README.md).
 
-type Variant = 'horizontal' | 'symbol'
-type Tone = 'onDark' | 'onLight' | 'white' | 'black'
+const ASSETS = {
+  horizontal: { src: '/brand/svg/logo-on-dark.svg', ratio: 1239 / 229 },
+  symbol: { src: '/brand/svg/symbol.svg', ratio: 1 },
+} as const
 
 interface LogoProps {
-  variant?: Variant
-  tone?: Tone
-  /** Rendered height in px (default 28). Width follows the asset ratio. */
+  variant?: keyof typeof ASSETS
   height?: number
   className?: string
   priority?: boolean
 }
 
-const RATIO = { horizontal: 1239 / 229, symbol: 1 } as const
-
-const SRC: Record<Variant, Record<Tone, string>> = {
-  horizontal: {
-    onDark: '/brand/svg/logo-on-dark.svg',
-    onLight: '/brand/svg/logo-on-light.svg',
-    white: '/brand/svg/logo-white.svg',
-    black: '/brand/svg/logo-black.svg',
-  },
-  symbol: {
-    onDark: '/brand/svg/symbol.svg',
-    onLight: '/brand/svg/symbol.svg',
-    white: '/brand/svg/symbol-white.svg',
-    black: '/brand/svg/symbol-black.svg',
-  },
-}
-
-export default function Logo({
-  variant = 'horizontal',
-  tone = 'onDark',
-  height = 28,
-  className = '',
-  priority = false,
-}: LogoProps) {
-  const width = Math.round(height * RATIO[variant])
+export default function Logo({ variant = 'horizontal', height = 28, className = '', priority = false }: LogoProps) {
+  const { src, ratio } = ASSETS[variant]
+  const width = Math.round(height * ratio)
   return (
     <Image
-      src={SRC[variant][tone]}
-      alt="CODELYNT"
+      src={src}
+      alt={site.name}
       width={width}
       height={height}
       unoptimized

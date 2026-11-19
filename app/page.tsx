@@ -1,4 +1,5 @@
-import NavBar from '@/components/ui/NavBar'
+import NavBar from '@/components/layout/NavBar'
+import Footer from '@/components/layout/Footer'
 import Hero from '@/components/sections/Hero'
 import ProblemSolution from '@/components/sections/ProblemSolution'
 import Services from '@/components/sections/Services'
@@ -6,10 +7,7 @@ import Process from '@/components/sections/Process'
 import Portfolio from '@/components/sections/Portfolio'
 import WhyUs from '@/components/sections/WhyUs'
 import Team from '@/components/sections/Team'
-import Contact from '@/components/sections/Contact'
-import Footer from '@/components/ui/Footer'
-
-// Main page — single scrolling layout. Each section has an id for anchor navigation.
+import ContactSection from '@/features/contact/ContactSection'
 
 export default function Home() {
   return (
@@ -22,7 +20,7 @@ export default function Home() {
       <Portfolio />
       <WhyUs />
       <Team />
-      <Contact />
+      <ContactSection />
       <Footer />
     </main>
   )

@@ -2,204 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CODELYNT Design Tokens ──────────────────────────────────────────── */
-:root {
-  --bg-base:        #0B1020;
-  --bg-surface:     #0F1730;
-  --bg-card:        #121A36;
-  --bg-card-hover:  #172145;
-
-  --accent:         #3B82F6;
-  --accent-light:   #60A5FA;
-  --accent-muted:   #1D4ED8;
-  --accent-2:       #06B6D4;
-
-  --text-primary:   #F5F7FF;
-  --text-secondary: #A3B1CC;
-  --text-muted:     #6B7A99;
-
-  --border-subtle:  rgba(59, 130, 246, 0.14);
-  --border-accent:  rgba(59, 130, 246, 0.40);
-
-  --gradient-brand: linear-gradient(135deg, #3B82F6, #06B6D4);
-  --glow-blue:      0 0 40px rgba(59, 130, 246, 0.25);
-}
-
-/* ─── Base ───────────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg-base);
-  color: var(--text-primary);
-  font-family: var(--font-sora), system-ui, sans-serif;
+  background-color: theme('colors.bg-base');
+  color: theme('colors.text-primary');
+  @apply font-sans;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Focus Visible ─────────────────────────────────────────────────────────── */
 *:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid theme('colors.accent.DEFAULT');
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
-/* ─── Selection ─────────────────────────────────────────────────────────────── */
 ::selection {
-  background-color: var(--accent);
+  background-color: theme('colors.accent.DEFAULT');
   color: #fff;
 }
 
-/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: theme('colors.bg-base');
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--accent-muted);
+  background: theme('colors.accent.muted');
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
+  background: theme('colors.accent.DEFAULT');
 }
 
-/* ─── Section spacing (py-20 md:py-28) ─────────────────── */
-.section-padding {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-@media (min-width: 768px) {
-  .section-padding {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
-  }
-}
-
-/* ─── Prose reset ───────────────────────────────────────────────────────────── */
 p {
   line-height: 1.7;
 }
 
-/* ─── Token-based utilities ─────────────────────────────────────────────────── */
-@layer utilities {
-  .bg-base       { background-color: var(--bg-base); }
-  .bg-surface    { background-color: var(--bg-surface); }
-  .bg-card       { background-color: var(--bg-card); }
-  .bg-card-hover { background-color: var(--bg-card-hover); }
-
-  .text-primary   { color: var(--text-primary); }
-  .text-secondary { color: var(--text-secondary); }
-  .text-muted     { color: var(--text-muted); }
-  .text-accent    { color: var(--accent); }
-
-  .border-subtle { border-color: var(--border-subtle); }
-  .border-accent { border-color: var(--border-accent); }
-
-  /* Standard easing for all hover/interactive transitions */
-  .transition-spec {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+@layer components {
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  /* Reusable hero glow (blue/cyan, low opacity) */
+  .section-py {
+    @apply py-20 md:py-28;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-2;
+  }
+
+  .section-title {
+    @apply font-semibold text-text-primary;
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-brand bg-clip-text text-transparent;
+  }
+
   .hero-glow {
     background:
-      radial-gradient(ellipse 60% 50% at 50% -10%, rgba(59, 130, 246, 0.22) 0%, transparent 65%),
-      radial-gradient(ellipse 40% 40% at 85% 20%, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+      radial-gradient(ellipse 60% 50% at 50% -10%, theme('colors.accent.DEFAULT / 22%') 0%, transparent 65%),
+      radial-gradient(ellipse 40% 40% at 85% 20%, theme('colors.accent.2 / 12%') 0%, transparent 70%);
   }
 
-  /* Subtle grid pattern */
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgba(59, 130, 246, 0.07) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(59, 130, 246, 0.07) 1px, transparent 1px);
+      linear-gradient(to right, theme('colors.accent.DEFAULT / 7%') 1px, transparent 1px),
+      linear-gradient(to bottom, theme('colors.accent.DEFAULT / 7%') 1px, transparent 1px);
     background-size: 56px 56px;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 75%);
   }
 
-  .text-gradient {
-    background-image: var(--gradient-brand);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  /* Eyebrow */
-  .eyebrow {
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--accent-2);
-  }
-
-  /* Section title */
-  .section-title {
-    font-weight: 600;
-    font-size: clamp(1.875rem, 4vw, 3rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    color: var(--text-primary);
-  }
-
-  /* Buttons */
   .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
-    min-height: 44px; padding: 0.75rem 1.5rem;
-    border-radius: 12px; font-weight: 600; font-size: 0.9375rem;
+    @apply inline-flex items-center justify-center gap-2 min-h-[44px] px-6 py-3 rounded-button font-semibold cursor-pointer;
+    font-size: 0.9375rem;
     transition: filter 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
   }
-  .btn:focus-visible { outline: 2px solid #60A5FA; outline-offset: 2px; border-radius: 12px; }
-  .btn-primary { background-image: var(--gradient-brand); color: #fff; }
-  .btn-primary:hover { filter: brightness(1.1); box-shadow: var(--glow-blue); }
-  .btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border-accent); }
-  .btn-secondary:hover { background-color: var(--bg-card-hover); }
+  .btn:focus-visible {
+    outline: 2px solid theme('colors.accent.light');
+    outline-offset: 2px;
+  }
+  .btn-primary {
+    @apply bg-gradient-brand text-white hover:brightness-110 hover:shadow-glow-blue;
+  }
+  .btn-secondary {
+    @apply bg-transparent text-text-primary border border-border-accent hover:bg-bg-card-hover;
+  }
 
-  /* Cards */
   .card {
-    background-color: var(--bg-card);
-    border: 1px solid var(--border-subtle);
-    border-radius: 16px;
+    @apply bg-bg-card border border-border-subtle rounded-card;
     transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .card:hover {
-    border-color: var(--border-accent);
+  .card-interactive:hover {
+    @apply border-border-accent shadow-glow-blue;
     transform: translateY(-2px);
-    box-shadow: var(--glow-blue);
   }
 
-  /* Icon tile */
+  .card-accent-line {
+    @apply h-px w-full flex-shrink-0;
+    background: linear-gradient(90deg, theme('colors.accent.DEFAULT') 0%, theme('colors.accent.2') 35%, transparent 70%);
+  }
+
   .icon-tile {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 44px; height: 44px; border-radius: 12px;
-    background-color: rgba(59, 130, 246, 0.1); color: #60A5FA; flex-shrink: 0;
+    @apply inline-flex items-center justify-center w-11 h-11 rounded-button bg-accent/10 text-accent-light flex-shrink-0;
   }
 
-  .section-py { padding-top: 5rem; padding-bottom: 5rem; }
-  @media (min-width: 768px) { .section-py { padding-top: 7rem; padding-bottom: 7rem; } }
-
-  .card-glow:hover {
-    box-shadow: 0 0 0 1px var(--border-accent), var(--glow-blue);
+  .focus-ring {
+    @apply focus-visible:outline-2 focus-visible:outline-accent-light;
   }
 }
 
-/* ─── Marquee (TrustBar, CSS-only) ─────────────────────────────────────────── */
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  animation: marquee-scroll 28s linear infinite;
-}
-
-/* ─── Reduced motion: disable all transitions/animations ───────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -209,5 +129,7 @@ p {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .card:hover { transform: none; }
+  .card-interactive:hover {
+    transform: none;
+  }
 }
