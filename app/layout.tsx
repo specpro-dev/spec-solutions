@@ -4,6 +4,7 @@ import './globals.css'
 import GoogleAnalytics from '@/lib/analytics/GoogleAnalytics'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import { MotionProvider } from '@/components/ui/Reveal'
+import SmoothScroll from '@/components/ui/SmoothScroll'
 import { site } from '@/config/site'
 import { colors } from '@/config/theme'
 
@@ -79,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" dir="ltr" className={sora.variable}>
       <body>
+        <SmoothScroll />
         <MotionProvider>{children}</MotionProvider>
         <WhatsAppButton />
         <GoogleAnalytics />

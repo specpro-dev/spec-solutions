@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useLenis } from 'lenis/react'
 import Logo from '@/components/ui/Logo'
 import SectionLink from '@/components/ui/SectionLink'
 import { linkableSections, navSections, site } from '@/config/site'
@@ -15,6 +16,7 @@ export default function NavBar() {
   const drawerRef = useRef<HTMLDivElement>(null)
   const openerRef = useRef<HTMLButtonElement>(null)
   const prefersReduced = useReducedMotion()
+  const lenis = useLenis()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -31,6 +33,7 @@ export default function NavBar() {
   useEffect(() => {
     if (!menuOpen) return
     document.body.style.overflow = 'hidden'
+    lenis?.stop()
     const focusables = () =>
       Array.from(drawerRef.current?.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? [])
     focusables()[0]?.focus()
@@ -53,8 +56,9 @@ export default function NavBar() {
     return () => {
       document.removeEventListener('keydown', onKey)
       document.body.style.overflow = ''
+      lenis?.start()
     }
-  }, [menuOpen, closeMenu])
+  }, [menuOpen, closeMenu, lenis])
 
   const hideMenu = () => setMenuOpen(false)
 

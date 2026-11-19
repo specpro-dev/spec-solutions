@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   background-color: theme('colors.bg-base');
   color: theme('colors.text-primary');
