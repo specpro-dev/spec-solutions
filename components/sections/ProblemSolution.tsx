@@ -1,54 +1,77 @@
-import { Clock, MonitorSmartphone, Gauge } from 'lucide-react'
+import { Check } from 'lucide-react'
 import Section from '@/components/ui/Section'
-import SectionHeader from '@/components/ui/SectionHeader'
-import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 
-// Only patterns a business owner can verify themselves; no made-up statistics.
+// Every answer here is already promised in Process or Why Us; this section must not add new claims.
 
-const problems = [
+const ROWS = [
   {
-    Icon: Clock,
-    heading: 'After-hours inquiries go unanswered',
-    body: "A Facebook page can't take a booking at 11 PM when a parent is researching class options for their child. Without a website and an intake form, those inquiries move on to whoever picks up next.",
-    solution: 'An always-on website captures leads and appointments 24/7 — no staff required.',
+    usually: 'You get a price, not a plan.',
+    ours: 'A written spec of every feature, screen and integration, before any code.',
   },
   {
-    Icon: MonitorSmartphone,
-    heading: 'An outdated site loses the client before a call',
-    body: "A prospect Google-searches your clinic or academy, lands on a site that looks like it hasn't been touched since 2016, and decides before calling that your business probably isn't worth their time.",
-    solution: 'First impressions happen in milliseconds. A credible, fast-loading site closes the gap before you even speak to them.',
+    usually: "Scope keeps moving after you've paid.",
+    ours: 'Fixed scope you sign off. No surprise invoices.',
   },
   {
-    Icon: Gauge,
-    heading: 'Slow sites lose mobile visitors in under 3 seconds',
-    body: "Google's own data: 53% of mobile visits are abandoned if a page takes more than 3 seconds to load. In Sri Lanka, where most browsing happens on mobile, a slow site is effectively a closed door.",
-    solution: 'Every site we build targets a sub-2-second load time and a 95+ Google Lighthouse score — this one included.',
+    usually: 'You first see the product at launch.',
+    ours: 'A working demo every two weeks, while changes are still cheap.',
+  },
+  {
+    usually: 'A theme with plugins bolted on.',
+    ours: 'Custom code, built for your process, with no plugins to patch.',
+  },
+  {
+    usually: 'Handover is a zip file and a goodbye.',
+    ours: 'A recorded walkthrough and full ownership of the source code.',
   },
 ]
 
+const columnLabel = 'font-mono text-[11px] uppercase tracking-[0.08em] text-text-secondary'
+
 export default function ProblemSolution() {
   return (
-    <Section id="problems" label="Problems we solve" tone="base">
-      <SectionHeader
-        align="center"
-        eyebrow="Why it matters"
-        title="Most businesses lose clients before the conversation starts"
-      />
+    <Section id="problems" label="How we work differently" tone="base">
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 items-start">
+        <Reveal className="lg:sticky lg:top-28">
+          <p className="eyebrow">Sound familiar?</p>
+          <h2 className="section-title mt-4 text-[clamp(1.875rem,3.2vw,2.75rem)]">
+            Most software projects go wrong before the first line of code.
+          </h2>
+          <p className="mt-5 text-[17px] text-text-secondary max-w-[44ch]">
+            Not because the developers can&apos;t build. Because nobody wrote down what was being built. We start there.
+          </p>
+        </Reveal>
 
-      <RevealGroup className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {problems.map(({ Icon, heading, body, solution }) => (
-          <RevealItem key={heading} as="article" className="card card-interactive h-full p-6 flex flex-col gap-4">
-            <div className="icon-tile">
-              <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
-            </div>
-            <h3 className="text-lg font-semibold text-text-primary">{heading}</h3>
-            <p className="text-text-secondary text-sm leading-relaxed flex-grow">{body}</p>
-            <div className="border-t border-border-subtle pt-4">
-              <p className="text-accent-light text-sm font-medium">{solution}</p>
-            </div>
-          </RevealItem>
-        ))}
-      </RevealGroup>
+        <div className="min-w-0">
+          <div className="hidden md:grid grid-cols-2 gap-7 pb-2.5 border-b border-text-primary" aria-hidden="true">
+            <span className={columnLabel}>Usually</span>
+            <span className={columnLabel}>With Codelynt</span>
+          </div>
+
+          <RevealGroup as="ul">
+            {ROWS.map(({ usually, ours }) => (
+              <RevealItem
+                key={usually}
+                as="li"
+                className="grid gap-2 md:grid-cols-2 md:gap-7 py-[18px] border-b border-border-subtle text-base leading-normal"
+              >
+                <p className="text-text-secondary">
+                  <span className="sr-only">Usually: </span>
+                  {usually}
+                </p>
+                <p className="flex gap-2.5 text-text-primary">
+                  <Check size={16} strokeWidth={1.75} className="flex-none mt-1 text-accent-text" aria-hidden="true" />
+                  <span>
+                    <span className="sr-only">With Codelynt: </span>
+                    {ours}
+                  </span>
+                </p>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </div>
     </Section>
   )
 }

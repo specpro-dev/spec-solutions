@@ -6,7 +6,7 @@ import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import { MotionProvider } from '@/components/ui/Reveal'
 import SmoothScroll from '@/components/ui/SmoothScroll'
 import { site } from '@/config/site'
-import { colors } from '@/config/theme'
+import { palettes } from '@/config/theme'
 
 const sora = Sora({
   subsets: ['latin'],
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: colors['bg-base'],
+  themeColor: palettes.light['bg-base'],
   width: 'device-width',
   initialScale: 1,
 }

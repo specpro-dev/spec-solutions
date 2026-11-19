@@ -1,44 +1,48 @@
 import { ArrowRight } from 'lucide-react'
-import BrandSymbol from '@/components/ui/BrandSymbol'
-import { alpha, colors } from '@/config/theme'
 import SectionLink from '@/components/ui/SectionLink'
 
-// The H1 is the LCP element: keep it text-only and never animate it.
+// The statement is anchored low on the left; the H1 is the LCP element: text only, never animated.
 
 export default function Hero() {
   return (
-    <section className="relative flex items-center overflow-hidden min-h-[100svh] bg-bg-base">
-      <div className="absolute inset-0 hero-glow" aria-hidden="true" />
-      <div className="absolute inset-0 bg-grid" aria-hidden="true" />
+    <section
+      aria-label="Introduction"
+      className="flex flex-col bg-bg-surface min-h-[min(78svh,680px)] pt-16"
+    >
+      <div className="page-container w-full flex flex-col flex-1">
+        <div className="flex-1 min-h-24" />
 
-      <BrandSymbol
-        gradientId="hero-sym"
-        outline
-        strokeWidth={0.8}
-        className="pointer-events-none absolute -right-24 top-1/2 -translate-y-1/2 w-[28rem] md:w-[40rem] lg:w-[46rem] opacity-30 md:opacity-40"
-        style={{ filter: `drop-shadow(0 0 40px ${alpha(colors.accent.DEFAULT, 0.35)})` }}
-      />
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] lg:items-end pb-16 lg:pb-24">
+          <h1 className="font-semibold text-text-primary text-[clamp(44px,5.6vw,88px)] leading-[0.98] tracking-[-0.035em] [text-wrap:balance]">
+            Software, built to the{' '}
+            <span className="underline decoration-accent decoration-[0.08em] underline-offset-[0.12em] [text-decoration-skip-ink:none]">
+              spec.
+            </span>
+          </h1>
 
-      <div className="relative page-container w-full pt-32 pb-20">
-        <p className="eyebrow mb-6">Build · Innovate · Transform</p>
-
-        <h1 className="font-semibold text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] tracking-tight text-text-primary max-w-3xl">
-          Turn Ideas Into <span className="text-gradient">Intelligent Solutions</span>
-        </h1>
-
-        <p className="mt-6 text-lg sm:text-xl text-text-secondary max-w-xl leading-relaxed">
-          Custom software. AI-powered solutions. Real business impact.
-        </p>
-
-        <div className="mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-          <SectionLink to="contact" track={{ event: 'cta_click', params: { label: 'hero_contact', location: 'hero' } }} className="btn btn-primary">
-            Get in Touch
-            <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-          </SectionLink>
-
-          <SectionLink to="portfolio" track={{ event: 'cta_click', params: { label: 'hero_portfolio', location: 'hero' } }} className="btn btn-secondary">
-            View Our Work
-          </SectionLink>
+          <div className="flex flex-col gap-7 lg:pb-2">
+            <p className="text-lg leading-[1.55] text-text-secondary max-w-[40ch]">
+              Before we write a line of code, you get a written specification: every feature, every screen. You sign
+              it off, then we build exactly that.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <SectionLink
+                to="contact"
+                track={{ event: 'cta_click', params: { label: 'hero_contact', location: 'hero' } }}
+                className="btn btn-primary"
+              >
+                Start your spec
+                <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
+              </SectionLink>
+              <SectionLink
+                to="portfolio"
+                track={{ event: 'cta_click', params: { label: 'hero_portfolio', location: 'hero' } }}
+                className="text-link inline-flex items-center min-h-[44px] font-semibold text-text-primary"
+              >
+                See the work
+              </SectionLink>
+            </div>
+          </div>
         </div>
       </div>
     </section>

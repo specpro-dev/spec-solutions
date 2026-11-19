@@ -1,4 +1,4 @@
-import { Globe, Zap, SearchCheck } from 'lucide-react'
+import { ArrowRight, Globe, Zap, SearchCheck } from 'lucide-react'
 import Section from '@/components/ui/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
 import SectionLink from '@/components/ui/SectionLink'
@@ -46,11 +46,9 @@ export default function Services() {
       <RevealGroup className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {SERVICES.map(({ id, Icon, number, outcome, heading, body, fit }) => (
           <RevealItem key={id} as="article" className="card card-interactive group relative flex flex-col overflow-hidden">
-            <div className="card-accent-line" aria-hidden="true" />
-
             <div className="flex flex-col gap-5 p-8 flex-1">
               <div className="flex items-start justify-between">
-                <span className="text-4xl font-bold leading-none select-none text-accent/20" aria-hidden="true">
+                <span className="text-4xl font-bold leading-none select-none text-border-strong" aria-hidden="true">
                   {number}
                 </span>
                 <div className="icon-tile">
@@ -58,7 +56,7 @@ export default function Services() {
                 </div>
               </div>
 
-              <p className="text-sm font-semibold leading-snug text-accent-2">{outcome}</p>
+              <p className="text-sm font-medium leading-snug text-text-secondary">{outcome}</p>
 
               <div className="flex flex-col gap-3 flex-1">
                 <h3 className="text-lg font-bold leading-snug text-text-primary">{heading}</h3>
@@ -69,7 +67,7 @@ export default function Services() {
                 {fit.map(tag => (
                   <span
                     key={tag}
-                    className="text-xs px-2.5 py-1 rounded-md bg-accent/[0.08] text-text-secondary border border-border-subtle"
+                    className="text-xs px-2.5 py-1 rounded-md bg-bg-surface text-text-secondary border border-border-subtle"
                   >
                     {tag}
                   </span>
@@ -79,10 +77,10 @@ export default function Services() {
               <SectionLink
                 to="contact"
                 track={{ event: 'service_click', params: { service: id } }}
-                className="group/link flex items-center gap-1.5 text-sm font-medium w-fit min-h-[44px] text-accent-light transition-colors duration-200"
+                className="group/link flex items-center gap-1.5 text-sm font-medium w-fit min-h-[44px] text-text-primary hover:text-accent-text transition-colors duration-200"
               >
                 Discuss this<span className="sr-only"> {heading}</span>
-                <span className="transition-transform duration-200 group-hover/link:translate-x-0.5 inline-block">→</span>
+                <ArrowRight size={16} strokeWidth={1.75} className="transition-transform duration-200 group-hover/link:translate-x-0.5" aria-hidden="true" />
               </SectionLink>
             </div>
           </RevealItem>

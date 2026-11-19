@@ -1,4 +1,4 @@
-import { Check } from 'lucide-react'
+import { Check, CornerDownRight } from 'lucide-react'
 import Section from '@/components/ui/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
 import SectionLink from '@/components/ui/SectionLink'
@@ -57,12 +57,12 @@ export default function Process() {
             {STEPS.map(({ number, title, duration, body, deliverable }) => (
               <RevealItem key={number} as="li" className="relative flex gap-10 pb-14 last:pb-0">
                 <div
-                  className="absolute top-1.5 left-[10px] w-3 h-3 rounded-full z-10 border-2 bg-bg-surface border-accent"
+                  className="absolute top-1.5 left-[10px] w-3 h-3 rounded-full z-10 border-2 bg-bg-surface border-text-primary"
                   aria-hidden="true"
                 />
 
                 <div className="flex-shrink-0 w-8 pt-0.5 pl-7">
-                  <span className="text-xs font-medium tracking-widest text-accent-light">{number}</span>
+                  <span className="text-xs font-medium tracking-widest text-text-secondary">{number}</span>
                 </div>
 
                 <div className="flex-1">
@@ -72,9 +72,7 @@ export default function Process() {
                   </div>
                   <p className="text-sm leading-relaxed mb-3 text-text-secondary">{body}</p>
                   <div className="flex items-start gap-2">
-                    <span className="text-xs flex-shrink-0 mt-0.5 text-accent" aria-hidden="true">
-                      ↳
-                    </span>
+                    <CornerDownRight size={14} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-text-muted" aria-hidden="true" />
                     <span className="text-xs leading-relaxed text-text-secondary">{deliverable}</span>
                   </div>
                 </div>
@@ -84,12 +82,10 @@ export default function Process() {
         </ScrollProgressLine>
 
         <div className="lg:sticky lg:top-32">
-          <Reveal className="card card-interactive overflow-hidden flex flex-col">
-            <div className="card-accent-line" aria-hidden="true" />
-
+          <Reveal className="theme-ink card overflow-hidden flex flex-col">
             <div className="flex flex-col gap-6 p-8 flex-1">
               <div>
-                <p className="text-xs tracking-widest uppercase mb-3 text-accent-light">No Commitment Required</p>
+                <p className="eyebrow mb-3">No Commitment Required</p>
                 <h3 className="text-xl font-bold mb-3 leading-snug text-text-primary">
                   Start with a 30-minute discovery call.
                 </h3>
@@ -102,7 +98,7 @@ export default function Process() {
               <ul className="flex flex-col gap-3" aria-label="What to expect">
                 {EXPECTATIONS.map(item => (
                   <li key={item} className="flex items-start gap-2.5">
-                    <Check size={14} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-accent-2" aria-hidden="true" />
+                    <Check size={14} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-accent-text" aria-hidden="true" />
                     <span className="text-sm text-text-secondary">{item}</span>
                   </li>
                 ))}

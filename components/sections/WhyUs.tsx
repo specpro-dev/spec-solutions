@@ -34,7 +34,7 @@ const differentiators = [
 
 export default function WhyUs() {
   return (
-    <Section id="why-us" label="Why Codelynt" tone="surface">
+    <Section id="why-us" label="Why Codelynt" tone="ink">
       <SectionHeader
         eyebrow="Our approach"
         title="Software engineers, not designers who also code"
@@ -48,7 +48,7 @@ export default function WhyUs() {
             className="py-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start group"
           >
             <div
-              className="text-5xl font-bold text-accent/20 group-hover:text-accent/30 transition-colors duration-300 select-none leading-none"
+              className="text-5xl font-bold text-border-strong group-hover:text-accent-text transition-colors duration-300 select-none leading-none"
               aria-hidden="true"
             >
               {item.number}
@@ -58,7 +58,7 @@ export default function WhyUs() {
               <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
             </div>
             <div className="md:text-right">
-              <span className="inline-block px-3 py-1.5 rounded-lg bg-accent/10 border border-border-subtle text-accent-light text-xs font-semibold">
+              <span className="inline-block px-3 py-1.5 rounded-lg bg-bg-card border border-border-subtle text-text-primary text-xs font-semibold">
                 {item.tag}
               </span>
             </div>

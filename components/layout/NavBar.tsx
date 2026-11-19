@@ -2,11 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { ArrowRight, Menu, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
-import Logo from '@/components/ui/Logo'
+import Logo, { HORIZONTAL_RATIO, SYMBOL_RATIO } from '@/components/ui/Logo'
 import SectionLink from '@/components/ui/SectionLink'
 import { linkableSections, navSections, site } from '@/config/site'
+
+const LOGO_HEIGHT = 32
 
 const contactTrack = { event: 'cta_click', params: { cta_label: 'Get in Touch', section: 'navbar' } }
 
@@ -66,22 +68,37 @@ export default function NavBar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50">
         <div
-          className={`border-b transition-colors duration-200 ${
-            scrolled ? 'bg-bg-base/80 backdrop-blur-md border-border-subtle' : 'bg-transparent border-transparent'
+          className={`border-b transition-colors duration-500 ease-out ${
+            scrolled ? 'theme-ink bg-bg-base/90 backdrop-blur-md border-border-subtle' : 'bg-transparent border-transparent'
           }`}
         >
-          <nav className="page-container h-16 flex items-center justify-between" aria-label="Main navigation">
+          <nav className="page-container h-24 flex items-center justify-between" aria-label="Main navigation">
             <SectionLink to="top" aria-label={`${site.name} — return to top`}>
-              <Logo height={28} priority className="md:hidden" />
-              <Logo height={32} priority className="hidden md:block" />
+              {/* Clips the wordmark away so only the symbol remains, cross-fading light → dark artwork. */}
+              <span
+                className="relative block overflow-hidden transition-[width] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                style={{ height: LOGO_HEIGHT, width: LOGO_HEIGHT * (scrolled ? SYMBOL_RATIO : HORIZONTAL_RATIO) }}
+              >
+                <Logo
+                  height={LOGO_HEIGHT}
+                  priority
+                  className={`absolute left-0 top-0 max-w-none transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`}
+                />
+                <Logo
+                  on="dark"
+                  height={LOGO_HEIGHT}
+                  priority
+                  className={`absolute left-0 top-0 max-w-none transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}
+                />
+              </span>
             </SectionLink>
 
-            <ul className="hidden md:flex items-center gap-8">
+            <ul className="hidden md:flex items-center gap-16">
               {navSections.map(id => (
                 <li key={id}>
                   <SectionLink
                     to={id}
-                    className="inline-flex items-center min-h-[44px] text-sm font-medium text-text-secondary hover:text-text-primary transition-colors duration-200"
+                    className="inline-flex items-center min-h-[44px] text-lg font-medium text-text-secondary hover:text-text-primary transition-colors duration-200"
                   >
                     {linkableSections[id]}
                   </SectionLink>
@@ -91,7 +108,8 @@ export default function NavBar() {
 
             <div className="flex items-center gap-3">
               <SectionLink to="contact" track={contactTrack} className="btn btn-primary hidden md:inline-flex">
-                Get in Touch →
+                Get in Touch
+                <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
               </SectionLink>
 
               <button
@@ -140,7 +158,7 @@ export default function NavBar() {
                   key={id}
                   to={id}
                   onNavigate={hideMenu}
-                  className="py-5 text-2xl font-semibold tracking-tight border-b border-border-subtle text-text-primary hover:text-accent-light transition-colors duration-200"
+                  className="py-5 text-2xl font-semibold tracking-tight border-b border-border-subtle text-text-primary hover:text-accent-text transition-colors duration-200"
                 >
                   {linkableSections[id]}
                 </SectionLink>
@@ -149,7 +167,8 @@ export default function NavBar() {
 
             <div className="mt-auto">
               <SectionLink to="contact" track={contactTrack} onNavigate={hideMenu} className="btn btn-primary w-full">
-                Get in Touch →
+                Get in Touch
+                <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
               </SectionLink>
             </div>
           </m.div>

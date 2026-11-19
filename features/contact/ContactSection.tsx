@@ -16,7 +16,7 @@ const INPUTS = [
 ] as const satisfies readonly { id: ContactField; [k: string]: string }[]
 
 const inputCls =
-  'w-full min-h-[44px] bg-bg-card border border-border-subtle rounded-button px-4 py-3 text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent-light/60 transition-colors duration-200 aria-[invalid=true]:border-red-400'
+  'w-full min-h-[44px] bg-bg-card border border-border-subtle rounded-button px-4 py-3 text-text-primary placeholder:text-text-muted text-sm focus:outline-none focus:border-text-primary focus:ring-2 focus:ring-accent/40 transition-colors duration-200 aria-[invalid=true]:border-red-600'
 
 type Status = { kind: 'idle' | 'loading' | 'success' } | { kind: 'error'; message: string }
 
@@ -36,11 +36,11 @@ function Field({
   return (
     <div>
       <label htmlFor={id} className="block text-text-primary text-sm font-medium mb-1.5">
-        {label} <span className="text-accent-2" aria-hidden="true">*</span>
+        {label} <span className="text-accent-text" aria-hidden="true">*</span>
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-1.5 text-xs text-red-400" role="alert">
+        <p id={`${id}-error`} className="mt-1.5 text-xs text-red-700" role="alert">
           {error}
         </p>
       )}
@@ -114,25 +114,25 @@ export default function ContactSection() {
             {status.kind === 'success' && (
               <div
                 role="status"
-                className="flex items-start gap-3 p-4 rounded-xl bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 mb-6"
+                className="flex items-start gap-3 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 mb-6"
               >
                 <CheckCircle2 size={18} strokeWidth={1.75} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <p className="font-semibold text-sm">We received your message!</p>
-                  <p className="text-sm mt-0.5 text-emerald-300/80">We&apos;ll be in touch within one business day.</p>
+                  <p className="text-sm mt-0.5 text-emerald-700">We&apos;ll be in touch within one business day.</p>
                 </div>
               </div>
             )}
 
             {status.kind === 'error' && (
-              <div role="alert" className="flex items-start gap-3 p-4 rounded-xl bg-red-500/10 border border-red-400/30 text-red-300 mb-6">
+              <div role="alert" className="flex items-start gap-3 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 mb-6">
                 <AlertCircle size={18} strokeWidth={1.75} className="flex-shrink-0 mt-0.5" aria-hidden="true" />
                 <div>
                   <p className="font-semibold text-sm">Submission failed</p>
-                  <p className="text-sm mt-0.5 text-red-300/90">{status.message}</p>
-                  <p className="text-sm mt-1 text-red-300/80">
+                  <p className="text-sm mt-0.5 text-red-700">{status.message}</p>
+                  <p className="text-sm mt-1 text-red-700">
                     You can also reach us directly at{' '}
-                    <a href={`mailto:${site.email}`} className="underline hover:text-red-200">
+                    <a href={`mailto:${site.email}`} className="underline hover:text-red-900">
                       {site.email}
                     </a>
                   </p>
@@ -194,7 +194,7 @@ export default function ContactSection() {
           <ContactRow Icon={Mail} label="Email">
             <a
               href={`mailto:${site.email}`}
-              className="text-text-primary text-sm hover:text-accent-light transition-colors duration-200"
+              className="text-text-primary text-sm text-link"
             >
               {site.email}
             </a>
@@ -205,7 +205,7 @@ export default function ContactSection() {
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-primary text-sm hover:text-accent-light transition-colors duration-200"
+              className="text-text-primary text-sm text-link"
             >
               {site.whatsapp.display}
             </a>
@@ -218,7 +218,7 @@ export default function ContactSection() {
 
           <div className="mt-6 p-4 rounded-card border border-border-subtle bg-bg-card">
             <p className="text-text-secondary text-sm">
-              <span className="text-accent-light font-semibold">Typical response time:</span> within one business day.
+              <span className="text-text-primary font-semibold">Typical response time:</span> within one business day.
               We don&apos;t have a sales team — you&apos;ll hear directly from one of the founders.
             </p>
           </div>

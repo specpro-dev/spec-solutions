@@ -6,10 +6,14 @@ Single page, sections in this order (do not add or remove): NavBar → Hero → 
 Transparent → `bg-base/80` + blur + 1px border-subtle on scroll. Links: Services, Solutions, About. One CTA "Get in Touch →". Mobile: full-height drawer, focus trap, ESC closes, scroll locked, logo in header. Careers omitted until a page exists.
 
 ## Hero
-H1 "Turn Ideas Into Intelligent Solutions" ("Intelligent Solutions" in gradient text). Subline "Custom software. AI-powered solutions. Real business impact." CTAs: Get in Touch, View Our Work. Visual: faint inline-SVG symbol outline + hero glow + grid; no raster images, no animation on the LCP text.
+Height min(78svh, 680px), so the next section peeks in. Background bg-surface (#F4F5F7), not pure white, to avoid glare on a text-only field.
+- H1 "Software, built to the spec." anchored at the bottom-left: clamp(44px, 5.6vw, 88px), 600, line-height 0.98, tracking −0.035em; "spec." underlined in brand blue.
+- Right column, bottom-aligned with the H1: 18px subline (40ch) about the signed spec, one primary button "Start your spec" and a text link "See the work".
+- No eyebrow, no background art, no images. The H1 is the LCP element and never animates.
 
 ## Content sections
-ProblemSolution, Services, Process, WhyUs: `.card`, `.eyebrow`, `.section-title`, `.icon-tile` with lucide icons.
+ProblemSolution ("Usually / With Codelynt" ledger): white background. Left 5/12 column, sticky on desktop: eyebrow "Sound familiar?", left-aligned headline, two-sentence grey intro. Right 7/12 column: two 11px mono column labels over a black rule, then five rows with 1px subtle rules; left cell grey (what usually goes wrong), right cell black with a blue lucide check (what we do). Rows stack on mobile. Every answer must already be promised in Process or Why Us; no new claims. No cards or icon tiles.
+Services, Process, WhyUs: `.card`, `.eyebrow`, `.section-title`, `.icon-tile` with lucide icons.
 Portfolio: cover image + navy bottom gradient overlay, live links `target="_blank" rel="noopener noreferrer"`.
 Team: initials on `bg-gradient-brand` tile; members and titles unchanged.
 

@@ -58,7 +58,7 @@ function LinkedInIcon() {
 }
 
 const linkCls =
-  'inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] text-text-secondary hover:text-accent-light transition-colors duration-200'
+  'inline-flex items-center gap-1.5 text-xs font-medium min-h-[44px] text-text-secondary hover:text-text-primary transition-colors duration-200'
 
 export default function Team() {
   return (
@@ -72,19 +72,17 @@ export default function Team() {
       <RevealGroup className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl">
         {MEMBERS.map(({ initials, name, role, credential, linkedIn, portfolio }) => (
           <RevealItem key={name} className="card card-interactive overflow-hidden flex flex-col">
-            <div className="card-accent-line" aria-hidden="true" />
-
             <div className="flex flex-col gap-5 p-7">
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-gradient-brand"
+                  className="w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 bg-accent-strong"
                   aria-hidden="true"
                 >
                   <span className="text-lg font-bold select-none text-white">{initials}</span>
                 </div>
                 <div>
                   <p className="font-bold text-base leading-snug text-text-primary">{name}</p>
-                  <p className="text-sm font-medium mt-0.5 text-accent-light">{role}</p>
+                  <p className="text-sm font-medium mt-0.5 text-accent-text">{role}</p>
                 </div>
               </div>
 

@@ -45,7 +45,7 @@ export default function Portfolio() {
       <RevealGroup className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {projects.map(project => (
           <RevealItem key={project.id} as="article" className="card card-interactive h-full overflow-hidden group">
-            <div className="relative w-full overflow-hidden">
+            <div className="w-full overflow-hidden border-b border-border-subtle">
               <Image
                 src={project.src}
                 alt={project.alt}
@@ -54,17 +54,11 @@ export default function Portfolio() {
                 className="w-full h-auto object-cover motion-safe:group-hover:scale-[1.02] transition-transform duration-500"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-              <div
-                className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none bg-gradient-to-t from-bg-base via-bg-base/[0.85] via-40% to-transparent"
-                aria-hidden="true"
-              />
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <span className="eyebrow">{project.badge}</span>
-                <h3 className="mt-2 text-lg font-semibold text-text-primary">{project.title}</h3>
-              </div>
             </div>
 
             <div className="p-6">
+              <span className="eyebrow">{project.badge}</span>
+              <h3 className="mt-2 mb-3 text-lg font-semibold text-text-primary">{project.title}</h3>
               <p className="text-text-secondary text-sm leading-relaxed">{project.description}</p>
               <div className="mt-4">
                 <a
@@ -82,7 +76,7 @@ export default function Portfolio() {
               <ul className="mt-5 space-y-2.5" aria-label="Project highlights">
                 {project.points.map(point => (
                   <li key={point} className="flex items-start gap-2.5">
-                    <Check size={16} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-accent-2" aria-hidden="true" />
+                    <Check size={16} strokeWidth={1.75} className="flex-shrink-0 mt-0.5 text-accent-text" aria-hidden="true" />
                     <span className="text-text-secondary text-sm">{point}</span>
                   </li>
                 ))}

@@ -15,7 +15,7 @@ export default function WhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
       onClick={() => trackEvent('whatsapp_click', { label: 'floating_button', destination: 'whatsapp' })}
-      className="fixed bottom-6 right-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-bg-card border border-border-accent shadow-glow-blue transition-colors duration-200 hover:bg-bg-card-hover motion-safe:hover:-translate-y-0.5 focus-ring focus-visible:outline-offset-2"
+      className="fixed bottom-6 right-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-bg-card border border-border-subtle shadow-float transition-colors duration-200 hover:bg-bg-card-hover motion-safe:hover:-translate-y-0.5 focus-ring focus-visible:outline-offset-2"
     >
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path

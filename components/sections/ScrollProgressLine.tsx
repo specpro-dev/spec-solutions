@@ -13,7 +13,7 @@ export default function ScrollProgressLine({ children }: { children: ReactNode }
     <div className="relative" ref={ref}>
       <div className="absolute top-1.5 bottom-1.5 left-4 w-px pointer-events-none bg-border-subtle" aria-hidden="true" />
       <m.div
-        className="absolute top-1.5 left-4 w-px h-[calc(100%-0.375rem)] pointer-events-none origin-top bg-gradient-to-b from-accent to-accent-2"
+        className="absolute top-1.5 left-4 w-px h-[calc(100%-0.375rem)] pointer-events-none origin-top bg-accent"
         style={{ scaleY }}
         aria-hidden="true"
       />
