@@ -17,9 +17,9 @@ Each palette becomes CSS variables: `:root` is light, and any element with `.the
 | border-subtle / strong | #E5E7EB / #CBD0D8 | #262626 / #404040 |
 | accent-text (blue text, thin icons) | #2563EB | #60A5FA |
 
-Brand blue (same everywhere): `accent` #3B82F6 for marks and lines, `accent-strong` #2563EB for button fills (white text, AA), `accent-hover` #1D4ED8.
+Brand blue (same everywhere): `accent` #3B82F6 for marks and lines, `accent-hover` #1E3A8A for the primary button's hover pill.
 
-Where blue goes: primary buttons, eyebrows, icon tiles, the hero underline, check icons, the timeline progress line, team initials, required-field stars. Black bands: Why Us, the Process CTA card, the footer. Text-muted is for placeholders and fine print only.
+Where blue goes: primary buttons, eyebrows, icon tiles, the hero underline, check icons, the timeline progress line, required-field stars. Black bands: Why Us, the Process CTA card, the footer. Text-muted is for placeholders and fine print only.
 
 ## Typography
 Sora via next/font (`--font-sora`), weights 400/500/600/700. Section titles: 600, clamp(1.875rem, 4vw, 3rem), tight leading.
@@ -27,7 +27,7 @@ Sora via next/font (`--font-sora`), weights 400/500/600/700. Section titles: 600
 ## Components (classes in `app/globals.css`; React primitives in `components/ui/`)
 - Icons: lucide-react only, stroke 1.75, `aria-hidden`. No text arrows (→, ↳). Exceptions: brand marks lucide doesn't ship (LinkedIn, WhatsApp) and the Codelynt logo.
 - `.btn .btn-primary` the logo symbol's blue → cyan gradient one step deeper (`bg-gradient-button`, #2563EB → #0E7490, 135°) with white text, ≥5.2:1 across the gradient (the logo's exact cyan would only give 2.4:1). On hover a navy (#1E3A8A) pill slides in from the left and the icon nudges right. `.btn-secondary` card bg with border-strong, text-primary border on hover. 10px radius, ≥44px tall. Focus ring 2px accent-text.
-- `.card` white, 1px border-subtle, 14px radius. Add `.card-interactive` for the hover lift (border-strong, soft neutral shadow, translateY(-2px); no lift under reduced motion).
+- `.card` white, 1px border-subtle, 14px radius.
 - `.eyebrow` uppercase xs accent-text with a small accent dot. `.section-title`.
 - `.icon-tile` 44px, accent/10 fill, accent-text lucide icon (stroke 1.75).
 - `.text-link` underline that turns accent on hover.
@@ -35,7 +35,7 @@ Sora via next/font (`--font-sora`), weights 400/500/600/700. Section titles: 600
 
 ## Layout
 Sections `py-20 md:py-28` (`.section-py`); container `max-w-7xl px-4 sm:px-6 lg:px-8`.
-Order: NavBar, Hero, ProblemSolution, Services, Process, CaseStudies, WhyUs, Team, CtaBanner, Footer (the contact form lives on its own page at `/contact`).
+Order: NavBar, Hero, Services, CaseStudies, WhyUs, Process, CtaBanner, Footer (the contact form lives on its own page at `/contact`). NavBar and Footer come from `app/layout.tsx`; pages render only their `<main>`.
 
 ## Logo rules
 - Navbar: horizontal on-light, 28px mobile / 32px md+. Footer and black sections: horizontal on-dark. Loading screen: symbol.
@@ -43,4 +43,4 @@ Order: NavBar, Hero, ProblemSolution, Services, Process, CaseStudies, WhyUs, Tea
 - Do not stretch, recolor with CSS filters, add shadows, or place on busy backgrounds.
 
 ## Motion & a11y
-Animate opacity/transform only via `components/ui/Reveal.tsx` (`Reveal`, `RevealGroup`/`RevealItem`), which bails out under prefers-reduced-motion. In-page links use `SectionLink`; section ids and labels live in `config/site.ts`. Visible focus on all controls; labels on all inputs.
+Animate opacity/transform only via `components/ui/Reveal.tsx` (`Reveal`, `RevealGroup`/`RevealItem`), which bails out under prefers-reduced-motion. In-page links use `SectionLink`; section ids and labels live in `config/sections.ts`, and `<Section id>` only accepts those ids. WhatsApp links go through `WhatsAppLink`; analytics events are typed in `lib/analytics`. Visible focus on all controls; labels on all inputs.

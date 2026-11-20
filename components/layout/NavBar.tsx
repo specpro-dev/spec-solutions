@@ -1,17 +1,20 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
+import { flushSync } from 'react-dom'
 import { m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import Logo, { HORIZONTAL_RATIO, SYMBOL_RATIO } from '@/components/ui/Logo'
 import SectionLink from '@/components/ui/SectionLink'
 import ContactLink from '@/components/ui/ContactLink'
-import { linkableSections, navSections, site } from '@/config/site'
+import { navSections, sections } from '@/config/sections'
+import { site } from '@/config/site'
+import type { TrackedEvent } from '@/lib/analytics'
 
 const LOGO_HEIGHT = 32
 
-const contactTrack = { event: 'cta_click', params: { cta_label: 'Get in Touch', section: 'navbar' } }
+const contactTrack: TrackedEvent = { event: 'cta_click', params: { label: 'navbar_contact', location: 'navbar' } }
 
 export default function NavBar() {
   const [scrolled, setScrolled] = useState(false)
@@ -63,7 +66,10 @@ export default function NavBar() {
     }
   }, [menuOpen, closeMenu, lenis])
 
-  const hideMenu = () => setMenuOpen(false)
+  // Any link in the drawer closes it first, so its scroll lock is released before the link scrolls.
+  const closeOnLink = (e: MouseEvent) => {
+    if ((e.target as HTMLElement).closest('a')) flushSync(() => setMenuOpen(false))
+  }
 
   return (
     <>
@@ -101,7 +107,7 @@ export default function NavBar() {
                     to={id}
                     className="inline-flex items-center min-h-[44px] text-lg font-medium text-text-secondary hover:text-text-primary transition-colors duration-200"
                   >
-                    {linkableSections[id]}
+                    {sections[id]}
                   </SectionLink>
                 </li>
               ))}
@@ -115,7 +121,7 @@ export default function NavBar() {
 
               <button
                 ref={openerRef}
-                className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer focus-ring"
+                className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-button text-text-primary cursor-pointer"
                 onClick={() => setMenuOpen(true)}
                 aria-label="Open navigation menu"
                 aria-expanded={menuOpen}
@@ -140,6 +146,7 @@ export default function NavBar() {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: prefersReduced ? 0 : '100%', opacity: prefersReduced ? 0 : 1 }}
             transition={{ type: 'tween', duration: prefersReduced ? 0.15 : 0.32, ease: [0.16, 1, 0.3, 1] }}
+            onClickCapture={closeOnLink}
             className="fixed inset-0 z-[60] flex flex-col h-[100dvh] px-4 sm:px-6 pt-3 pb-10 bg-bg-base"
           >
             <div className="flex items-center justify-between h-16">
@@ -158,16 +165,15 @@ export default function NavBar() {
                 <SectionLink
                   key={id}
                   to={id}
-                  onNavigate={hideMenu}
                   className="py-5 text-2xl font-semibold tracking-tight border-b border-border-subtle text-text-primary hover:text-accent-text transition-colors duration-200"
                 >
-                  {linkableSections[id]}
+                  {sections[id]}
                 </SectionLink>
               ))}
             </nav>
 
             <div className="mt-auto">
-              <ContactLink track={contactTrack} onNavigate={hideMenu} className="btn btn-primary w-full">
+              <ContactLink track={contactTrack} className="btn btn-primary w-full">
                 Get in Touch
                 <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
               </ContactLink>

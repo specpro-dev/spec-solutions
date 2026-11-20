@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Sora } from 'next/font/google'
 import './globals.css'
 import GoogleAnalytics from '@/lib/analytics/GoogleAnalytics'
+import NavBar from '@/components/layout/NavBar'
+import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import { MotionProvider } from '@/components/ui/Reveal'
 import SmoothScroll from '@/components/ui/SmoothScroll'
@@ -17,7 +19,7 @@ const sora = Sora({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: site.title,
+  title: { default: site.title, template: `%s | ${site.displayName}` },
   description: site.description,
   keywords: [
     'custom software development',
@@ -83,7 +85,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" dir="ltr" className={sora.variable}>
       <body>
         <SmoothScroll />
-        <MotionProvider>{children}</MotionProvider>
+        <MotionProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </MotionProvider>
         <WhatsAppButton />
         <GoogleAnalytics />
       </body>

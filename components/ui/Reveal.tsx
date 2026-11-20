@@ -25,7 +25,7 @@ const group: Variants = {
 interface Props {
   children: ReactNode
   className?: string
-  as?: 'div' | 'ol' | 'ul' | 'li' | 'article'
+  as?: 'div' | 'ol' | 'ul' | 'li'
 }
 
 function Trigger({ variants, children, className, as = 'div' }: Props & { variants: Variants }) {

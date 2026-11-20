@@ -16,8 +16,16 @@ export const analyticsCsp = {
   ],
 }
 
-export type TrackParams = Record<string, string | number | boolean>
+// Every event the site sends, with the fields GA reports for it.
+type Events = {
+  cta_click: { label: string; location: string }
+  whatsapp_click: { label: string; destination: 'whatsapp' }
+  service_click: { service: string }
+  form_submit: { label: 'contact_form'; status: 'success' | 'error' }
+}
 
-export function trackEvent(eventName: string, params?: TrackParams): void {
-  window.gtag?.('event', eventName, params)
+export type TrackedEvent = { [E in keyof Events]: { event: E; params: Events[E] } }[keyof Events]
+
+export function trackEvent({ event, params }: TrackedEvent): void {
+  window.gtag?.('event', event, params)
 }

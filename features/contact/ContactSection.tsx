@@ -5,7 +5,8 @@ import { Mail, Phone, MapPin, CheckCircle2, AlertCircle, Loader2, type LucideIco
 import Section from '@/components/ui/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
 import { Reveal } from '@/components/ui/Reveal'
-import { site, whatsappUrl } from '@/config/site'
+import WhatsAppLink from '@/components/ui/WhatsAppLink'
+import { site } from '@/config/site'
 import { trackEvent } from '@/lib/analytics'
 import { FIELDS, GOALS, parseLead, type ContactErrors, type ContactField } from './schema'
 
@@ -22,21 +23,11 @@ type Status = { kind: 'idle' | 'loading' | 'success' } | { kind: 'error'; messag
 
 const FALLBACK_ERROR = 'Something went wrong. Please try again.'
 
-function Field({
-  id,
-  label,
-  error,
-  children,
-}: {
-  id: ContactField
-  label: string
-  error?: string
-  children: React.ReactNode
-}) {
+function Field({ id, error, children }: { id: ContactField; error?: string; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="block text-text-primary text-sm font-medium mb-1.5">
-        {label} <span className="text-accent-text" aria-hidden="true">*</span>
+        {FIELDS[id].label} <span className="text-accent-text" aria-hidden="true">*</span>
       </label>
       {children}
       {error && (
@@ -91,17 +82,18 @@ export default function ContactSection() {
       if (!res.ok || json.error) throw new Error(json.error || FALLBACK_ERROR)
 
       setStatus({ kind: 'success' })
-      trackEvent('form_submit', { label: 'contact_form', status: 'success' })
+      trackEvent({ event: 'form_submit', params: { label: 'contact_form', status: 'success' } })
       form.reset()
     } catch (err) {
       setStatus({ kind: 'error', message: err instanceof Error ? err.message : FALLBACK_ERROR })
-      trackEvent('form_submit', { label: 'contact_form', status: 'error' })
+      trackEvent({ event: 'form_submit', params: { label: 'contact_form', status: 'error' } })
     }
   }
 
   return (
-    <Section id="contact" label="Contact us" tone="surface">
+    <Section tone="surface">
       <SectionHeader
+        className="mb-16"
         align="center"
         level="h1"
         eyebrow="Get in touch"
@@ -143,12 +135,12 @@ export default function ContactSection() {
 
             <form onSubmit={handleSubmit} noValidate className="space-y-5">
               {INPUTS.map(input => (
-                <Field key={input.id} id={input.id} label={FIELDS[input.id].label} error={errors[input.id]}>
+                <Field key={input.id} id={input.id} error={errors[input.id]}>
                   <input {...input} name={input.id} required className={inputCls} {...errorProps(input.id, errors)} />
                 </Field>
               ))}
 
-              <Field id="goal" label="What do you need?" error={errors.goal}>
+              <Field id="goal" error={errors.goal}>
                 <select
                   id="goal"
                   name="goal"
@@ -170,7 +162,6 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                id="contact-submit"
                 disabled={status.kind === 'loading'}
                 className="btn btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed"
               >
@@ -202,14 +193,9 @@ export default function ContactSection() {
           </ContactRow>
 
           <ContactRow Icon={Phone} label="Phone / WhatsApp">
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-text-primary text-sm text-link"
-            >
+            <WhatsAppLink location="contact_page" className="text-text-primary text-sm text-link">
               {site.whatsapp.display}
-            </a>
+            </WhatsAppLink>
           </ContactRow>
 
           <ContactRow Icon={MapPin} label="Location">

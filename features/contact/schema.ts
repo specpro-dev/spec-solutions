@@ -1,16 +1,13 @@
-export const GOALS = [
-  'Build a business system',
-  'Add AI to our workflows',
-  'Replace or modernise a legacy system',
-  'Build a new product or MVP',
-  'Something else',
-] as const
+import { services } from '@/features/services/data'
 
+export const GOALS: readonly string[] = [...services.map(s => s.goal), 'Something else']
+
+// What the form collects. `collected` is how the privacy policy lists each one.
 export const FIELDS = {
-  name: { label: 'Your name', required: 'Please enter your name.' },
-  businessName: { label: 'Company', required: 'Please enter your company name.' },
-  phone: { label: 'Phone number', required: 'Please enter a valid phone number.' },
-  goal: { label: 'What do you need?', required: 'Please choose one.' },
+  name: { label: 'Your name', collected: 'Your name', required: 'Please enter your name.' },
+  businessName: { label: 'Company', collected: 'Your business name', required: 'Please enter your company name.' },
+  phone: { label: 'Phone number', collected: 'Your phone number', required: 'Please enter a valid phone number.' },
+  goal: { label: 'What do you need?', collected: 'The goal you choose', required: 'Please choose one.' },
 } as const
 
 export type ContactField = keyof typeof FIELDS
@@ -21,7 +18,7 @@ const isValid: Record<ContactField, (v: string) => boolean> = {
   name: v => v.length > 0,
   businessName: v => v.length > 0,
   phone: v => /^[+()\d\s-]{7,}$/.test(v),
-  goal: v => (GOALS as readonly string[]).includes(v),
+  goal: v => GOALS.includes(v),
 }
 
 /** Same rules on the client (inline errors) and the API route (rejects bad requests). */

@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
 import LegalPage from '@/components/layout/LegalPage'
 import { site } from '@/config/site'
+import { FIELDS } from '@/features/contact/schema'
 
-// Keep this in step with what the site actually collects (features/contact/schema.ts, lib/analytics).
-// Have it reviewed before launch.
+// The form fields come from features/contact/schema.ts; keep the analytics
+// paragraph in step with lib/analytics. Have it reviewed before launch.
 
 export const metadata: Metadata = {
-  title: `Privacy policy | ${site.displayName}`,
+  title: 'Privacy policy',
   alternates: { canonical: '/privacy' },
 }
 
@@ -17,10 +18,9 @@ export default function PrivacyPage() {
         <h2>What we collect</h2>
         <p>When you send the contact form, we receive the details you enter:</p>
         <ul>
-          <li>Your name</li>
-          <li>Your business name</li>
-          <li>Your phone number</li>
-          <li>The goal you choose</li>
+          {Object.values(FIELDS).map(field => (
+            <li key={field.collected}>{field.collected}</li>
+          ))}
         </ul>
         <p className="mt-3">
           We also use Google Analytics to count visits and clicks on this site. It sets cookies and collects anonymous

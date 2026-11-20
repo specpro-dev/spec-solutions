@@ -1,8 +1,10 @@
-// Case studies shown on the home page (CaseStudies section) and at /case-studies/[slug].
+// Case studies shown on the home page (CaseStudiesSection) and at /case-studies/[slug].
 //
 // Drafted from the project details that were on the old Portfolio cards. Lines marked
 // CONFIRM are reasonable guesses, not known facts: check them with the client (and get
 // their OK to be named) before this goes live.
+
+import type { ServiceId } from '@/features/services/data'
 
 export interface CaseStudySection {
   heading: string
@@ -18,14 +20,14 @@ export interface CaseStudy {
   title: string
   summary: string
   published: string // ISO date
-  cover: { src: string; alt: string }
+  cover: { src: string; width: number; height: number; alt: string }
   // Screens for the scroll-story layout, in the order they scroll past. Captions describe
   // only what the screen shows.
   walkthrough: { src: string; width: number; height: number; caption: string }[]
   // Short lines for the home page scroll story.
   highlights: { problem: string; why: string }
   liveUrl: string
-  services: string[]
+  services: ServiceId[]
   sections: CaseStudySection[]
 }
 
@@ -41,6 +43,8 @@ export const caseStudies: CaseStudy[] = [
     published: '2026-11-21',
     cover: {
       src: '/a2a-cover.jpeg',
+      width: 1024,
+      height: 572,
       alt: 'A2A Services ordering app showing the menu grid with portion sizes, the order summary and the checkout steps',
     },
     walkthrough: [
@@ -54,7 +58,7 @@ export const caseStudies: CaseStudy[] = [
       why: 'Bulk orders are built over days, so nothing a customer adds should ever be lost.',
     },
     liveUrl: 'https://a2aservicesltd.co.uk/',
-    services: ['Business Systems'],
+    services: ['business_systems'],
     sections: [
       {
         heading: 'The situation',
@@ -105,6 +109,8 @@ export const caseStudies: CaseStudy[] = [
     published: '2026-11-21',
     cover: {
       src: '/dealsbuzz-cover.jpeg',
+      width: 1024,
+      height: 572,
       alt: 'DealsBuzz online store home page showing a lifestyle banner and product categories for sneakers, clogs, sandals and boots',
     },
     walkthrough: [
@@ -118,7 +124,7 @@ export const caseStudies: CaseStudy[] = [
       why: 'A deposit turns interest into a commitment, so stock is ordered against real demand.',
     },
     liveUrl: 'https://www.dealsbuzz.lk/',
-    services: ['Products & SaaS'],
+    services: ['products'],
     sections: [
       {
         heading: 'The situation',
@@ -165,6 +171,10 @@ export const caseStudies: CaseStudy[] = [
   },
 ]
 
+export function caseStudyPath(slug: string) {
+  return `/case-studies/${slug}`
+}
+
 export function getCaseStudy(slug: string) {
   return caseStudies.find(study => study.slug === slug)
 }
@@ -173,8 +183,4 @@ export function getCaseStudy(slug: string) {
 export function readingMinutes(study: CaseStudy) {
   const text = study.sections.flatMap(s => [s.heading, ...s.paragraphs, ...(s.points ?? [])]).join(' ')
   return Math.max(1, Math.ceil(text.split(/\s+/).length / 220))
-}
-
-export function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
 }

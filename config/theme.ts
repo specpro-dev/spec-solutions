@@ -36,7 +36,6 @@ export type ColorToken = keyof typeof light
 // Brand blue, same on light and black sections.
 export const accent = {
   DEFAULT: '#3B82F6',
-  strong: '#1D4ED8',
   // The pill that slides across a primary button on hover.
   hover: '#1E3A8A',
 }

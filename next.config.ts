@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
-import { sectionIds } from './config/site'
+import { sectionIds } from './config/sections'
 import { analyticsCsp } from './lib/analytics'
 
 const csp = [
@@ -7,8 +7,8 @@ const csp = [
   // Next.js hydration needs inline scripts; tighten to nonces once GA4 and the contact form are verified in production.
   `script-src 'self' 'unsafe-inline' 'unsafe-eval' ${analyticsCsp.script.join(' ')}`,
   // Framer Motion writes inline styles.
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data: https:",
   `connect-src 'self' ${analyticsCsp.connect.join(' ')}`,
   "frame-ancestors 'none'",

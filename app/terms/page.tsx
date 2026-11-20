@@ -6,7 +6,7 @@ import { site } from '@/config/site'
 // client's signed specification and agreement. Have it reviewed before launch.
 
 export const metadata: Metadata = {
-  title: `Terms of use | ${site.displayName}`,
+  title: 'Terms of use',
   alternates: { canonical: '/terms' },
 }
 

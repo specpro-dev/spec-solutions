@@ -78,10 +78,6 @@ p {
     @apply bg-bg-card border border-border-subtle rounded-card;
     transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .card-interactive:hover {
-    @apply border-border-strong shadow-card;
-    transform: translateY(-2px);
-  }
 
   .icon-tile {
     @apply inline-flex items-center justify-center w-11 h-11 rounded-button bg-accent/10 text-accent-text flex-shrink-0;
@@ -89,10 +85,6 @@ p {
 
   .text-link {
     @apply underline decoration-border-strong underline-offset-4 hover:decoration-accent transition-colors duration-200;
-  }
-
-  .focus-ring {
-    @apply focus-visible:outline-2 focus-visible:outline-accent-text;
   }
 }
 
@@ -103,8 +95,5 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  .card-interactive:hover {
-    transform: none;
   }
 }

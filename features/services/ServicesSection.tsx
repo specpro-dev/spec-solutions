@@ -2,6 +2,8 @@ import { ArrowUpRight } from 'lucide-react'
 import Section from '@/components/ui/Section'
 import ContactLink from '@/components/ui/ContactLink'
 import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
+import { ordinal } from '@/lib/format'
+import { services } from './data'
 
 // The intro carries the old Problem/Solution message; every promise here is
 // already backed by Process or Why Us, so it must not add new claims.
@@ -13,44 +15,9 @@ const PROMISES = [
   'Working hours that overlap the UK, EU and Australia',
 ]
 
-export const SERVICES = [
-  {
-    id: 'business_systems',
-    number: '01',
-    heading: 'Business Systems',
-    outcome: 'Replace the spreadsheets your operations run on.',
-    body: 'Order management, customer portals, scheduling, stock and reporting, built around how your team actually works and connected to the tools you already pay for.',
-    fit: ['Operations-heavy SMEs', 'Distributors & wholesalers', 'Multi-site service firms'],
-  },
-  {
-    id: 'ai_integration',
-    number: '02',
-    heading: 'AI Integration',
-    outcome: 'AI that does a real job inside the tools you already use.',
-    body: 'Document extraction, support triage, quote drafting and search across your own data, with the review steps you need before anything reaches a customer.',
-    fit: ['Document-heavy back offices', 'Support teams', 'Companies sitting on years of data'],
-  },
-  {
-    id: 'legacy_modernisation',
-    number: '03',
-    heading: 'Legacy Modernisation',
-    outcome: 'Get off the system nobody wants to touch.',
-    body: 'We work out what your old system really does, put an API in front of it, and replace it piece by piece so the business keeps running while it changes.',
-    fit: ['Ageing in-house systems', 'Access, Excel & VB apps', 'Platforms blocking new work'],
-  },
-  {
-    id: 'products',
-    number: '04',
-    heading: 'Products & SaaS',
-    outcome: 'From first spec to paying customers.',
-    body: 'MVPs and customer-facing products for funded founders, built by the same engineers who keep working on them after launch.',
-    fit: ['Seed & Series A startups', 'Companies launching a new product line'],
-  },
-] as const
-
-export default function Services() {
+export default function ServicesSection() {
   return (
-    <Section id="services" label="Services" tone="base">
+    <Section id="services" tone="base">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16 lg:items-end mb-14 md:mb-20">
         <Reveal>
           <p className="eyebrow mb-4">Services</p>
@@ -77,13 +44,13 @@ export default function Services() {
       </div>
 
       <RevealGroup as="ul" className="border-t border-text-primary">
-        {SERVICES.map(({ id, number, heading, outcome, body, fit }) => (
+        {services.map(({ id, heading, outcome, body, fit }, i) => (
           <RevealItem key={id} as="li" className="border-b border-border-subtle">
             <ContactLink
               track={{ event: 'service_click', params: { service: id } }}
               className="group grid gap-4 py-8 md:py-10 md:grid-cols-[3rem_minmax(0,5fr)_minmax(0,6fr)_2.75rem] md:gap-8 lg:gap-12 items-start"
             >
-              <span className="font-mono text-xs tracking-widest text-text-secondary md:pt-2.5">{number}</span>
+              <span className="font-mono text-xs tracking-widest text-text-secondary md:pt-2.5">{ordinal(i)}</span>
 
               <div>
                 <h3 className="text-2xl md:text-[1.75rem] font-semibold leading-tight tracking-[-0.02em] text-text-primary group-hover:text-accent-text transition-colors duration-200">

@@ -2,27 +2,19 @@
 
 import type { ReactNode } from 'react'
 import Link from 'next/link'
-import { trackEvent, type TrackParams } from '@/lib/analytics'
+import { trackEvent, type TrackedEvent } from '@/lib/analytics'
 
 interface ContactLinkProps {
   children: ReactNode
   className?: string
   'aria-label'?: string
-  track?: { event: string; params: TrackParams }
-  onNavigate?: () => void
+  track?: TrackedEvent
 }
 
 // Every "Get in touch" style call to action goes to the /contact page.
-export default function ContactLink({ children, track, onNavigate, ...rest }: ContactLinkProps) {
+export default function ContactLink({ children, track, ...rest }: ContactLinkProps) {
   return (
-    <Link
-      href="/contact"
-      onClick={() => {
-        onNavigate?.()
-        if (track) trackEvent(track.event, track.params)
-      }}
-      {...rest}
-    >
+    <Link href="/contact" onClick={() => track && trackEvent(track)} {...rest}>
       {children}
     </Link>
   )

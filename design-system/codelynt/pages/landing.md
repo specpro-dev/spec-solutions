@@ -1,9 +1,9 @@
 # Landing page — CODELYNT
 
-Single page, sections in this order (do not add or remove): NavBar → Hero → ProblemSolution → Services → Process → CaseStudies → WhyUs → Team → CtaBanner → Footer. The contact form is its own page at `/contact`; every "Get in touch" CTA links there through `ContactLink`.
+Single page, sections in this order (do not add or remove): NavBar → Hero → Services → CaseStudies → WhyUs → Process → CtaBanner → Footer. The contact form is its own page at `/contact`; every "Get in touch" CTA links there through `ContactLink`.
 
 ## NavBar
-Transparent → `bg-base/80` + blur + 1px border-subtle on scroll. Links: Services, Solutions, About. One CTA "Get in Touch →". Mobile: full-height drawer, focus trap, ESC closes, scroll locked, logo in header. Careers omitted until a page exists.
+Transparent → `bg-base/80` + blur + 1px border-subtle on scroll. Links: the sections in `navSections` (`config/sections.ts`). One CTA "Get in Touch →". Mobile: full-height drawer, focus trap, ESC closes, scroll locked, logo in header. Careers omitted until a page exists.
 
 ## Hero
 Height min(78svh, 680px), so the next section peeks in. Background bg-surface (#F4F5F7), not pure white, to avoid glare on a text-only field.
@@ -14,8 +14,8 @@ Height min(78svh, 680px), so the next section peeks in. Background bg-surface (#
 ## Content sections
 ProblemSolution ("Usually / With Codelynt" ledger): white background. Left 5/12 column, sticky on desktop: eyebrow "Sound familiar?", left-aligned headline, two-sentence grey intro. Right 7/12 column: two 11px mono column labels over a black rule, then five rows with 1px subtle rules; left cell grey (what usually goes wrong), right cell black with a blue lucide check (what we do). Rows stack on mobile. Every answer must already be promised in Process or Why Us; no new claims. No cards or icon tiles.
 Services, Process, WhyUs: `.card`, `.eyebrow`, `.section-title`, `.icon-tile` with lucide icons.
-CaseStudies: cards (cover, industry eyebrow, problem-led headline, summary, read time) linking to `/case-studies/[slug]`; content lives in `features/case-studies/data.ts`.
-Team: initials on `bg-gradient-brand` tile; members and titles unchanged.
+Services: content lives in `features/services/data.ts`, which also feeds the footer, the contact form's goals and case-study service tags.
+CaseStudies: scroll story (sticky story column, screens scrolling past) linking to `/case-studies/[slug]`; content lives in `features/case-studies/data.ts`.
 
 ## Contact
 Dark inputs (bg-card, border-subtle, blue focus ring), visible labels, inline validation, success/error states. API behavior unchanged.

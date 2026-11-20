@@ -1,21 +1,14 @@
-'use client'
-
-import { whatsappChatUrl } from '@/config/site'
-import { trackEvent } from '@/lib/analytics'
+import WhatsAppLink from '@/components/ui/WhatsAppLink'
 
 // Keeps WhatsApp's own green logo so visitors recognise it instantly; only the
 // button chrome follows the Codelynt theme.
 
 export default function WhatsAppButton() {
   return (
-    <a
-      href={whatsappChatUrl}
-      id="whatsapp-fab"
-      target="_blank"
-      rel="noopener noreferrer"
+    <WhatsAppLink
+      location="floating_button"
       aria-label="Chat with us on WhatsApp"
-      onClick={() => trackEvent('whatsapp_click', { label: 'floating_button', destination: 'whatsapp' })}
-      className="fixed bottom-6 right-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-bg-card border border-border-subtle shadow-float transition-colors duration-200 hover:bg-bg-card-hover motion-safe:hover:-translate-y-0.5 focus-ring focus-visible:outline-offset-2"
+      className="fixed bottom-6 right-5 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-bg-card border border-border-subtle shadow-float transition-colors duration-200 hover:bg-bg-card-hover motion-safe:hover:-translate-y-0.5 focus-visible:outline-offset-2"
     >
       <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path
@@ -32,6 +25,6 @@ export default function WhatsAppButton() {
           className="text-bg-card"
         />
       </svg>
-    </a>
+    </WhatsAppLink>
   )
 }

@@ -20,7 +20,7 @@ function renderEmail(lead: ContactLead) {
     .map(
       f => `
         <tr>
-          <td style="padding: 8px 0; color: #6B7280; font-size: 13px; width: 120px;">${FIELDS[f].label}</td>
+          <td style="padding: 8px 0; color: ${palettes.light['text-secondary']}; font-size: 13px; width: 120px;">${FIELDS[f].label}</td>
           <td style="padding: 8px 0; font-weight: 600; color: ${f === 'goal' ? palettes.light['accent-text'] : palettes.light['text-primary']};">${escapeHtml(lead[f])}</td>
         </tr>`
     )
@@ -30,7 +30,7 @@ function renderEmail(lead: ContactLead) {
     <div style="font-family: system-ui, sans-serif; max-width: 520px; padding: 24px;">
       <h2 style="color: ${palettes.light['text-primary']}; margin-top: 0;">New lead from ${site.displayName}</h2>
       <table style="width: 100%; border-collapse: collapse;">${rows}</table>
-      <p style="color: #9CA3AF; font-size: 12px; margin-top: 24px;">
+      <p style="color: ${palettes.light['text-muted']}; font-size: 12px; margin-top: 24px;">
         Submitted at ${new Date().toLocaleString('en-LK', { timeZone: 'Asia/Colombo' })} (Sri Lanka time)
       </p>
     </div>`

@@ -3,8 +3,10 @@ import { Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, type Lucide
 import Logo from '@/components/ui/Logo'
 import SectionLink from '@/components/ui/SectionLink'
 import ContactLink from '@/components/ui/ContactLink'
-import { SERVICES } from '@/components/sections/Services'
-import { site, socialLinks, whatsappChatUrl } from '@/config/site'
+import WhatsAppLink from '@/components/ui/WhatsAppLink'
+import { sections } from '@/config/sections'
+import { site, socialLinks } from '@/config/site'
+import { services } from '@/features/services/data'
 
 const linkCls =
   'inline-flex items-center min-h-[44px] text-sm text-text-secondary hover:text-text-primary transition-colors duration-200'
@@ -51,7 +53,7 @@ export default function Footer() {
           </div>
 
           <Column title="Services">
-            {SERVICES.map(({ id, heading }) => (
+            {services.map(({ id, heading }) => (
               <li key={id}>
                 <SectionLink to="services" className={linkCls}>
                   {heading}
@@ -63,7 +65,7 @@ export default function Footer() {
           <Column title="Company">
             <li>
               <SectionLink to="why-us" className={linkCls}>
-                Why us
+                {sections['why-us']}
               </SectionLink>
             </li>
             <li>
@@ -81,13 +83,13 @@ export default function Footer() {
           <Column title="Resources">
             <li>
               <SectionLink to="case-studies" className={linkCls}>
-                Case studies
+                {sections['case-studies']}
               </SectionLink>
             </li>
             <li>
-              <a href={whatsappChatUrl} target="_blank" rel="noopener noreferrer" className={linkCls}>
+              <WhatsAppLink location="footer" className={linkCls}>
                 WhatsApp us
-              </a>
+              </WhatsAppLink>
             </li>
           </Column>
 
@@ -118,9 +120,9 @@ export default function Footer() {
               </li>
             ))}
             <li>
-              <a href={whatsappChatUrl} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className={iconBtn}>
+              <WhatsAppLink location="footer_icon" aria-label="WhatsApp" className={iconBtn}>
                 <MessageCircle size={18} strokeWidth={1.75} aria-hidden="true" />
-              </a>
+              </WhatsAppLink>
             </li>
           </ul>
         </div>

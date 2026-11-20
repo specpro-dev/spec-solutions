@@ -1,11 +1,8 @@
-'use client'
-
 import Image from 'next/image'
 import { ArrowRight, MessageCircle } from 'lucide-react'
 import ContactLink from '@/components/ui/ContactLink'
 import { Reveal } from '@/components/ui/Reveal'
-import { whatsappChatUrl } from '@/config/site'
-import { trackEvent } from '@/lib/analytics'
+import WhatsAppLink from '@/components/ui/WhatsAppLink'
 
 export default function CtaBanner() {
   return (
@@ -41,16 +38,10 @@ export default function CtaBanner() {
               Book the call
               <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
             </ContactLink>
-            <a
-              href={whatsappChatUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackEvent('whatsapp_click', { label: 'cta_banner', destination: 'whatsapp' })}
-              className="btn btn-secondary"
-            >
+            <WhatsAppLink location="cta_banner" className="btn btn-secondary">
               <MessageCircle size={18} strokeWidth={1.75} aria-hidden="true" />
               Chat on WhatsApp
-            </a>
+            </WhatsAppLink>
           </div>
         </div>
       </Reveal>
