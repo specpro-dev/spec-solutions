@@ -21,11 +21,13 @@ export default function SectionLink({ to, children, track, onNavigate, ...rest }
 
   function handleClick(e: MouseEvent<HTMLAnchorElement>) {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    const onHome = document.getElementById('services') !== null
+    const target = to === 'top' ? (onHome ? 0 : null) : document.getElementById(to)
+    // Not on the home page (e.g. /privacy): let the browser follow the link.
+    if (target === null) return
     e.preventDefault()
     // Commit onNavigate first (e.g. the mobile menu closing and releasing its scroll lock).
     flushSync(() => onNavigate?.())
-    const target = to === 'top' ? 0 : document.getElementById(to)
-    if (target === null) return
     // Without Lenis the visitor prefers reduced motion, so jump instead of animating.
     if (lenis) lenis.scrollTo(target)
     else if (target === 0) window.scrollTo(0, 0)

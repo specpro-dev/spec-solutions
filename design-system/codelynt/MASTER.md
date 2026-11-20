@@ -35,7 +35,7 @@ Sora via next/font (`--font-sora`), weights 400/500/600/700. Section titles: 600
 
 ## Layout
 Sections `py-20 md:py-28` (`.section-py`); container `max-w-7xl px-4 sm:px-6 lg:px-8`.
-Order: NavBar, Hero, ProblemSolution, Services, Process, Portfolio, WhyUs, Team, Contact, Footer.
+Order: NavBar, Hero, ProblemSolution, Services, Process, CaseStudies, WhyUs, Team, CtaBanner, Footer (the contact form lives on its own page at `/contact`).
 
 ## Logo rules
 - Navbar: horizontal on-light, 28px mobile / 32px md+. Footer and black sections: horizontal on-dark. Loading screen: symbol.

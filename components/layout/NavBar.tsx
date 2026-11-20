@@ -6,6 +6,7 @@ import { ArrowRight, Menu, X } from 'lucide-react'
 import { useLenis } from 'lenis/react'
 import Logo, { HORIZONTAL_RATIO, SYMBOL_RATIO } from '@/components/ui/Logo'
 import SectionLink from '@/components/ui/SectionLink'
+import ContactLink from '@/components/ui/ContactLink'
 import { linkableSections, navSections, site } from '@/config/site'
 
 const LOGO_HEIGHT = 32
@@ -107,10 +108,10 @@ export default function NavBar() {
             </ul>
 
             <div className="flex items-center gap-3">
-              <SectionLink to="contact" track={contactTrack} className="btn btn-primary hidden md:inline-flex">
+              <ContactLink track={contactTrack} className="btn btn-primary hidden md:inline-flex">
                 Get in Touch
                 <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-              </SectionLink>
+              </ContactLink>
 
               <button
                 ref={openerRef}
@@ -166,10 +167,10 @@ export default function NavBar() {
             </nav>
 
             <div className="mt-auto">
-              <SectionLink to="contact" track={contactTrack} onNavigate={hideMenu} className="btn btn-primary w-full">
+              <ContactLink track={contactTrack} onNavigate={hideMenu} className="btn btn-primary w-full">
                 Get in Touch
                 <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-              </SectionLink>
+              </ContactLink>
             </div>
           </m.div>
         )}

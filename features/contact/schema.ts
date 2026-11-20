@@ -1,15 +1,16 @@
 export const GOALS = [
-  'Get more student registrations',
-  'Automate appointment bookings',
-  'Upgrade my current site',
+  'Build a business system',
+  'Add AI to our workflows',
+  'Replace or modernise a legacy system',
+  'Build a new product or MVP',
   'Something else',
 ] as const
 
 export const FIELDS = {
   name: { label: 'Your name', required: 'Please enter your name.' },
-  businessName: { label: 'Business name', required: 'Please enter your business name.' },
+  businessName: { label: 'Company', required: 'Please enter your company name.' },
   phone: { label: 'Phone number', required: 'Please enter a valid phone number.' },
-  goal: { label: 'Goal', required: 'Please choose a goal.' },
+  goal: { label: 'What do you need?', required: 'Please choose one.' },
 } as const
 
 export type ContactField = keyof typeof FIELDS

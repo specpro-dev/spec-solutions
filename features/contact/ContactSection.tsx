@@ -12,7 +12,7 @@ import { FIELDS, GOALS, parseLead, type ContactErrors, type ContactField } from 
 const INPUTS = [
   { id: 'name', type: 'text', autoComplete: 'name', placeholder: 'Jane Smith' },
   { id: 'businessName', type: 'text', autoComplete: 'organization', placeholder: 'Acme Ltd' },
-  { id: 'phone', type: 'tel', autoComplete: 'tel', placeholder: '+94 77 000 0000' },
+  { id: 'phone', type: 'tel', autoComplete: 'tel', placeholder: '+44 20 7946 0000' },
 ] as const satisfies readonly { id: ContactField; [k: string]: string }[]
 
 const inputCls =
@@ -103,9 +103,10 @@ export default function ContactSection() {
     <Section id="contact" label="Contact us" tone="surface">
       <SectionHeader
         align="center"
+        level="h1"
         eyebrow="Get in touch"
-        title="Book a free digital audit"
-        lede="Tell us about your business and we'll come back within one business day with a frank assessment of where your digital presence stands and what's worth fixing first."
+        title="Tell us about your project"
+        lede="A few details are enough to start. We'll reply within one business day to set up a call, and if we're not the right fit we'll tell you."
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 items-start">
@@ -147,7 +148,7 @@ export default function ContactSection() {
                 </Field>
               ))}
 
-              <Field id="goal" label="What's your primary goal?" error={errors.goal}>
+              <Field id="goal" label="What do you need?" error={errors.goal}>
                 <select
                   id="goal"
                   name="goal"
@@ -179,7 +180,7 @@ export default function ContactSection() {
                     Sending...
                   </>
                 ) : (
-                  "Send Message — It's Free"
+                  'Send message'
                 )}
               </button>
 
@@ -213,13 +214,13 @@ export default function ContactSection() {
 
           <ContactRow Icon={MapPin} label="Location">
             <p className="text-text-primary text-sm">{site.location}</p>
-            <p className="text-text-secondary text-xs mt-0.5">We work with clients island-wide, fully remote.</p>
+            <p className="text-text-secondary text-xs mt-0.5">Working remotely with clients in the UK, Europe, Australia and Sri Lanka.</p>
           </ContactRow>
 
           <div className="mt-6 p-4 rounded-card border border-border-subtle bg-bg-card">
             <p className="text-text-secondary text-sm">
               <span className="text-text-primary font-semibold">Typical response time:</span> within one business day.
-              We don&apos;t have a sales team — you&apos;ll hear directly from one of the founders.
+              There&apos;s no sales team. You&apos;ll hear directly from one of the founders.
             </p>
           </div>
         </Reveal>

@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
     }
   },
 
+  // The section used to be called Portfolio; keep old links working.
+  async redirects() {
+    return [{ source: '/portfolio', destination: '/case-studies', permanent: true }]
+  },
+
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],

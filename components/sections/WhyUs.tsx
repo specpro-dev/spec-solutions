@@ -1,70 +1,77 @@
+import Image from 'next/image'
 import Section from '@/components/ui/Section'
 import SectionHeader from '@/components/ui/SectionHeader'
-import { RevealGroup, RevealItem } from '@/components/ui/Reveal'
-
-// The "95+ Lighthouse" claims here and in ProblemSolution must match the deployed
-// score: run Lighthouse right before launch and qualify or remove them if it's lower.
+import { Reveal, RevealGroup, RevealItem } from '@/components/ui/Reveal'
 
 const differentiators = [
   {
     number: '01',
-    title: 'Custom-coded, not a template',
-    body: "WordPress, Wix, and Webflow templates are built for everyone — which means they're optimised for no one in particular. We write code from scratch for your specific business. That means faster load times, zero plugin bloat, and a site that can be extended to do whatever your business needs next.",
-    tag: 'No templates. No page builders.',
+    title: 'The spec comes first',
+    body: "Most overruns start with a vague brief. We write down every screen, rule and integration before we quote, so the price is tied to a document you can read. If the scope changes, the spec changes first and you see the cost before anyone builds it.",
+    tag: 'Fixed scope, written down.',
   },
   {
     number: '02',
-    title: 'Built for speed — measurably',
-    body: "Speed isn't a vague promise here. This very site scores 95+ on Google's own Lighthouse speed test (Performance, Accessibility, Best Practices, SEO). Open Chrome DevTools and run it yourself. That score directly affects how high Google ranks your site in search results.",
-    tag: 'Lighthouse 95+ — verify it yourself.',
+    title: 'Built to work with what you already run',
+    body: 'A new system has to talk to your accounting package, your CRM and that database from 2011. We plan integrations and data migration in the spec, so they are priced and scheduled rather than discovered in week eight.',
+    tag: 'Integrations planned up front.',
   },
   {
     number: '03',
-    title: 'Scales with your business',
-    body: "We build the foundation right so you're not starting over in 18 months. Need to add online payments? A student portal? An automated appointment reminder system? These can be added to a properly architected site without a full rebuild. We plan for where you're going, not just where you are.",
-    tag: 'Bookings, payments, portals — all addable.',
+    title: 'Code any team can pick up',
+    body: 'Typed, tested and documented, in a repository you own. If you later hire your own developers or move to another supplier, they can carry on from where we left off instead of starting again.',
+    tag: 'Your repository, your IP.',
   },
   {
     number: '04',
-    title: 'No plugin vulnerabilities',
-    body: "WordPress powers 43% of the web, which makes it the #1 target for automated hacking scripts. Most attacks don't target you specifically — they scan for known plugin vulnerabilities en masse. Custom-coded sites have no plugin surface area to exploit. Fewer moving parts means fewer things that can go wrong.",
-    tag: 'No plugins. No known attack vectors.',
+    title: 'Senior engineers, sensible rates',
+    body: "We're based in Colombo, so our working day covers UK and European mornings and Australian afternoons. You speak directly to the engineers building your system and see working software every two weeks.",
+    tag: 'Time-zone overlap with the UK, EU and AU.',
   },
 ]
 
 export default function WhyUs() {
   return (
     <Section id="why-us" label="Why Codelynt" tone="ink">
-      <SectionHeader
-        eyebrow="Our approach"
-        title="Software engineers, not designers who also code"
-        lede="The distinction matters. An engineer thinks about performance budgets, security surface area, and what happens when your business grows. A designer thinks about what looks good today."
-      />
+      <div className="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16 items-start">
+        <Reveal className="lg:sticky lg:top-32">
+          <div className="relative aspect-[4/3] lg:aspect-[4/5] overflow-hidden rounded-image border border-border-subtle">
+            <Image
+              src="/Why-Us.png"
+              alt="An engineer coding on a laptop at night beside a printed, hand-annotated specification"
+              fill
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              className="object-cover object-[50%_70%]"
+            />
+          </div>
+        </Reveal>
 
-      <RevealGroup className="divide-y divide-border-subtle">
-        {differentiators.map(item => (
-          <RevealItem
-            key={item.number}
-            className="py-8 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-6 md:gap-10 items-start group"
-          >
-            <div
-              className="text-5xl font-bold text-border-strong group-hover:text-accent-text transition-colors duration-300 select-none leading-none"
-              aria-hidden="true"
-            >
-              {item.number}
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold text-text-primary mb-2">{item.title}</h3>
-              <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
-            </div>
-            <div className="md:text-right">
-              <span className="inline-block px-3 py-1.5 rounded-lg bg-bg-card border border-border-subtle text-text-primary text-xs font-semibold">
-                {item.tag}
-              </span>
-            </div>
-          </RevealItem>
-        ))}
-      </RevealGroup>
+        <div className="min-w-0">
+          <SectionHeader
+            eyebrow="Our approach"
+            title="A small senior team, not an agency pipeline"
+            lede="The people on your first call are the people who write the code. No account managers passing messages along, and no handover to a different team once the project goes live."
+          />
+
+          <RevealGroup className="divide-y divide-border-subtle border-t border-border-subtle -mt-6">
+            {differentiators.map(item => (
+              <RevealItem key={item.number} className="py-8 grid grid-cols-[auto_1fr] gap-6 md:gap-8 items-start group">
+                <div
+                  className="text-3xl font-bold text-border-strong group-hover:text-accent-text transition-colors duration-300 select-none leading-none"
+                  aria-hidden="true"
+                >
+                  {item.number}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">{item.title}</h3>
+                  <p className="text-text-secondary leading-relaxed text-sm">{item.body}</p>
+                  <p className="mt-3 text-xs font-semibold text-text-primary">{item.tag}</p>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        </div>
+      </div>
     </Section>
   )
 }

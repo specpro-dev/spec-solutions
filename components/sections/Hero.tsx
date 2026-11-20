@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import SectionLink from '@/components/ui/SectionLink'
+import ContactLink from '@/components/ui/ContactLink'
 
 // The statement is anchored low on the left; the H1 is the LCP element: text only, never animated.
 
@@ -22,24 +23,23 @@ export default function Hero() {
 
           <div className="flex flex-col gap-7 lg:pb-2">
             <p className="text-lg leading-[1.55] text-text-secondary max-w-[40ch]">
-              Before we write a line of code, you get a written specification: every feature, every screen. You sign
-              it off, then we build exactly that.
+              We build business systems, products and AI tools for companies in the UK, Europe and Australia. You get a
+              written spec first, with every screen, integration and edge case listed, and we build what you signed.
             </p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-              <SectionLink
-                to="contact"
+              <ContactLink
                 track={{ event: 'cta_click', params: { label: 'hero_contact', location: 'hero' } }}
                 className="btn btn-primary"
               >
                 Start your spec
                 <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-              </SectionLink>
+              </ContactLink>
               <SectionLink
-                to="portfolio"
-                track={{ event: 'cta_click', params: { label: 'hero_portfolio', location: 'hero' } }}
+                to="case-studies"
+                track={{ event: 'cta_click', params: { label: 'hero_case_studies', location: 'hero' } }}
                 className="text-link inline-flex items-center min-h-[44px] font-semibold text-text-primary"
               >
-                See the work
+                Read the case studies
               </SectionLink>
             </div>
           </div>

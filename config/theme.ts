@@ -47,7 +47,8 @@ export const buttonGradient = ['#2563EB', '#0E7490'] as const
 
 export const brandGradient = ['#3B82F6', '#06B6D4'] as const
 
-export const radii = { card: '14px', button: '10px' } as const
+// Photos stay nearly square-cornered so they read as photography, not UI cards.
+export const radii = { card: '14px', button: '10px', image: '4px' } as const
 
 export const shadows = {
   card: '0 1px 2px rgba(10, 10, 10, 0.04), 0 12px 32px -16px rgba(10, 10, 10, 0.18)',
